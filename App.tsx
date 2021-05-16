@@ -1,10 +1,15 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import TopPadding from "./components/TopPadding";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+      <TopPadding />
+      <View style={{ backgroundColor: "red", flex: 1 }}>
+        <Text style={{ color: "blue", fontSize: 40 }}>you too quentin :)</Text>
+      </View>
+      <View style={{ height: 32, backgroundColor: "#e0e" }} />
     </View>
   );
 }
@@ -12,8 +17,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "column",
+    backgroundColor: "#fff",
   },
 });
