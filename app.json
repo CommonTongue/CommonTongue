@@ -1,0 +1,12 @@
+{
+  "name": "CommonTongue",
+  "displayName": "CommonTongue",
+  "expo": {
+    "name": "CommonTongue",
+    "slug": "CommonTongue",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
