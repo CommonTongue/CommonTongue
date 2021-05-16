@@ -1,15 +1,19 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import TopPadding from "./components/TopPadding";
+import BottomPadding from "./components/BottomPadding";
+import TopBar from "./components/TopBar";
+import BottomBar from "./components/BottomBar";
+import Center from "./components/Center";
 
 export default function App() {
   return (
     <View style={styles.container}>
       <TopPadding />
-      <View style={{ backgroundColor: "red", flex: 1 }}>
-        <Text style={{ color: "blue", fontSize: 40 }}>you too quentin :)</Text>
-      </View>
-      <View style={{ height: 32, backgroundColor: "#e0e" }} />
+      <TopBar />
+      <Center/>
+      <BottomBar />
+      <BottomPadding />
     </View>
   );
 }
