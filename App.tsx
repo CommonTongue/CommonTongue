@@ -5,25 +5,35 @@ import BottomPadding from "./components/BottomPadding";
 import TopBar from "./components/TopBar";
 import BottomBar from "./components/BottomBar";
 import Center from "./components/Center";
+import ModalContext, { ModalContentSchema } from "./contexts/ModalContext";
+import GlobalModal from "./components/GlobalModal";
 
 export default function App() {
-  const [modalVisible, setModalVisible] = useState(true);
+  const [modalState, setModalState] = useState({
+    showModal: false,
+    modalContent: undefined,
+  } as { showModal: boolean; modalContent: ModalContentSchema });
   return (
     <View style={styles.container}>
-      <Modal
-        animationType={"slide"}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(false);
+      <ModalContext.Provider
+        value={{
+          showModal: modalState.showModal,
+          modalContent: modalState.modalContent,
+          toggleModal: (showModal, modalContent) => {
+            setModalState({
+              showModal,
+              modalContent,
+            });
+          },
         }}
       >
-        { }
-      </Modal>
-      <TopPadding />
-      <TopBar />
-      <Center />
-      <BottomBar />
-      <BottomPadding />
+        <TopPadding />
+        <GlobalModal />
+        <TopBar />
+        <Center />
+        <BottomBar />
+        <BottomPadding />
+      </ModalContext.Provider>
     </View>
   );
 }
@@ -33,5 +43,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     backgroundColor: "#fff",
+    alignContent: "center",
+    justifyContent: "center",
+    display: "flex",
   },
 });

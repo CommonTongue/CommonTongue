@@ -2,6 +2,14 @@ import React from "react";
 import { View } from "react-native";
 import { bottomBarColor } from "../styles/AppTheme";
 
-export default function BottomPadding() {
-  return <View style={{ height: 32, backgroundColor: bottomBarColor }} />;
+export const bottomPaddingHeight = 32;
+export default function BottomPadding(props: { colorOverride?: string }) {
+  return (
+    <View
+      style={{
+        height: bottomPaddingHeight,
+        backgroundColor: bottomBarColor,
+      }}
+    />
+  );
 }
