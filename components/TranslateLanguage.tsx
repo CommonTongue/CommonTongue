@@ -10,20 +10,9 @@ export default function TranslateLanguage() {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        position: "relative",
       }}
     >
-      <div style={{ position: "fixed", zIndex: 10 }}>
-        <Flag size={64} type={"flat"} code={"US"} />
-      </div>
-      <div
-        style={{
-          position: "fixed",
-          backgroundColor: "white",
-          width: 64,
-          height: 44,
-        }}
-      />
+      <Flag size={64} type={"flat"} code={"US"} />
     </View>
   );
 }

@@ -7,14 +7,15 @@ export default function Level() {
   return (
     <View
       style={{
+        flex: 1,
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
       }}
     >
       <FontAwesomeIcon icon={faGrinTongue} size={40} />
-      <Text style={{ fontSize: 34, marginLeft: 10, fontWeight: "bold" }}>
-        lvl 14
+      <Text style={{ fontSize: 30, fontWeight: "bold", marginLeft: 10 }}>
+        14
       </Text>
     </View>
   );
