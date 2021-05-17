@@ -15,7 +15,7 @@ export default function PronounceButton() {
   };
   return (
     <TouchableWithoutFeedback onPress={pronounceWord}>
-      <FontAwesomeIcon icon={faVolumeUp} size={40} color={volumeColor} />
+      <FontAwesomeIcon icon={faVolumeUp} size={70} color={volumeColor} />
     </TouchableWithoutFeedback>
   );
 }
