@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
-  faCartPlus,
   faCompass,
   faGraduationCap,
   faStar,

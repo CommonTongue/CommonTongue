@@ -1,6 +1,21 @@
 import React from "react";
 import { View, Text } from "react-native";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faGrinTongue } from "@fortawesome/free-solid-svg-icons";
 
 export default function Level() {
-  return <Text>LEVEL</Text>;
+  return (
+    <View
+      style={{
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <FontAwesomeIcon icon={faGrinTongue} size={40} />
+      <Text style={{ fontSize: 34, marginLeft: 10, fontWeight: "bold" }}>
+        lvl 14
+      </Text>
+    </View>
+  );
 }
