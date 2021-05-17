@@ -32,8 +32,11 @@ export default function GlobalModal() {
         }}
       >
         {/** A slab to pad inserted items uniformly */}
-        <View style={{ height: 30 }} />
-        {useModal.modalContent}
+        <View>
+          <View style={{ height: 30 }} />
+          {useModal.modalContent}
+        </View>
+
         <TouchableOpacity
           onPress={() => useModal.toggleModal(false, undefined)}
           style={{
@@ -46,7 +49,14 @@ export default function GlobalModal() {
             justifyContent: "center",
           }}
         >
-          <Text style={{ color: "white", fontWeight: "bold" }}>Close</Text>
+          <Text
+            style={{
+              color: "white",
+              fontWeight: "bold",
+            }}
+          >
+            Close
+          </Text>
         </TouchableOpacity>
       </View>
     </Modal>
