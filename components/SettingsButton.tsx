@@ -6,7 +6,13 @@ import { tongueRed } from "../styles/AppTheme";
 
 export default function SettingsButton() {
   return (
-    <View>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <FontAwesomeIcon icon={faCog} size={40} />
     </View>
   );

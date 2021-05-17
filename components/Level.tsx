@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faGrinTongue } from "@fortawesome/free-solid-svg-icons";
+import { whiteBackground } from "../styles/AppTheme";
 
 export default function Level() {
   return (

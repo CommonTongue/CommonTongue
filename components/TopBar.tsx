@@ -19,11 +19,14 @@ export default function TopBar() {
       <View style={{ flex: 1 }}>
         <Level />
       </View>
-      <View style={{ flex: 1}}>
+      <View style={{ flex: 1 }}>
         <LearnLanguage />
       </View>
       <View style={{ flex: 1 }}>
         <TranslateLanguage />
+      </View>
+      <View style={{ flex: 1 }}>
+        <SettingsButton />
       </View>
     </View>
   );
