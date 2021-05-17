@@ -6,7 +6,7 @@ import { tongueRed } from "../styles/AppTheme";
 
 export default function SettingsButton() {
   return (
-    <View style={{  }}>
+    <View>
       <FontAwesomeIcon icon={faCog} size={40} />
     </View>
   );
