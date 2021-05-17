@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Text, TouchableOpacity } from "react-native";
 import ModalContext from "../contexts/ModalContext";
 import { commonBlue, whiteBackground } from "../styles/AppTheme";
+import ChooseLearnLanguage from "./ChooseLearnLanguage";
 
 export default function LearnLanguage() {
   const useModal = useContext(ModalContext);
@@ -18,7 +19,7 @@ export default function LearnLanguage() {
       }}
       activeOpacity={0.8}
       onPress={() => {
-        useModal.toggleModal(true, <Text>Hello</Text>);
+        useModal.toggleModal(true, <ChooseLearnLanguage />);
       }}
     >
       <Text style={{ color: whiteBackground, fontWeight: "bold" }}>

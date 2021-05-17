@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { tongueRed } from "../styles/AppTheme";
 import LearnLanguage from "./LearnLanguage";
 import Level from "./Level";

@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 import { commonBlue, whiteBackground } from "../styles/AppTheme";
 
 export default function TranslateLanguage() {
