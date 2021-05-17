@@ -16,9 +16,7 @@ export default function LearnLanguage() {
       }}
       activeOpacity={0.8}
     >
-      <Text style={{ color: whiteBackground, fontWeight: "bold" }}>
-        ENGLISH
-      </Text>
+      <Text style={{ color: whiteBackground, fontWeight: "bold" }}>ENGLISH</Text>
     </TouchableOpacity>
   );
 }
