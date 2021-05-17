@@ -9,9 +9,10 @@ export default function Center() {
         backgroundColor: "white",
         alignItems: "center",
         flexDirection: "column",
+        justifyContent: "center",
       }}
     >
-      <Text>sample</Text>
+      <Text style={{ fontSize: 40 }}>sample very</Text>
     </View>
   );
 }
