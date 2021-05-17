@@ -14,8 +14,15 @@ export default function Level() {
         alignItems: "center",
       }}
     >
-      <FontAwesomeIcon icon={faGrinTongue} size={40} />
-      <Text style={{ fontSize: 30, fontWeight: "bold", marginLeft: 10 }}>
+      <FontAwesomeIcon icon={faGrinTongue} size={40} color={whiteBackground} />
+      <Text
+        style={{
+          fontSize: 30,
+          fontWeight: "bold",
+          marginLeft: 10,
+          color: whiteBackground,
+        }}
+      >
         14
       </Text>
     </View>

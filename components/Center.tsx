@@ -15,7 +15,7 @@ export default function Center() {
       }}
     >
       <Text style={{ fontSize: 40 }}>sample</Text>
-      {/** Padding between word and pronounce button */}
+      {/** Padding between word and pronounce */}
       <View style={{ height: "5%" }} />
       <PronounceButton />
     </View>

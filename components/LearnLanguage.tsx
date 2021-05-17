@@ -1,19 +1,24 @@
 import React from "react";
-import { View, Text } from "react-native";
-// @ts-ignore
-import Flag from "react-native-flags";
+import { View, Text, TouchableOpacity } from "react-native";
+import { commonBlue, whiteBackground } from "../styles/AppTheme";
 
 export default function LearnLanguage() {
   return (
-    <View
+    <TouchableOpacity
       style={{
         flex: 1,
+        width: "80%",
+        backgroundColor: commonBlue,
+        borderRadius: 10,
+        display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        position: "relative",
       }}
+      activeOpacity={0.8}
     >
-      <Flag size={64} type={"flat"} code={"TR"} />
-    </View>
+      <Text style={{ color: whiteBackground, fontWeight: "bold" }}>
+        ENGLISH
+      </Text>
+    </TouchableOpacity>
   );
 }

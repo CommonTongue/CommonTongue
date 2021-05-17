@@ -10,23 +10,35 @@ export default function TopBar() {
   return (
     <View
       style={{
-        height: "10%",
+        height: "16%",
         backgroundColor: tongueRed,
         display: "flex",
-        flexDirection: "row",
+        flexDirection: "column",
       }}
     >
-      <View style={{ flex: 1 }}>
-        <Level />
+      <View style={{ flex: 1, display: "flex", flexDirection: "row" }}>
+        <View style={{ flex: 2 }}>
+          <Level />
+        </View>
+        <View style={{ flex: 1 }}>
+          <SettingsButton />
+        </View>
       </View>
-      <View style={{ flex: 1 }}>
-        <LearnLanguage />
-      </View>
-      <View style={{ flex: 1 }}>
-        <TranslateLanguage />
-      </View>
-      <View style={{ flex: 1 }}>
-        <SettingsButton />
+      <View
+        style={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "row",
+          marginTop: 10,
+          marginBottom: 10,
+        }}
+      >
+        <View style={{ flex: 1, display: "flex", alignItems: "center" }}>
+          <LearnLanguage />
+        </View>
+        <View style={{ flex: 1 }}>
+          <TranslateLanguage />
+        </View>
       </View>
     </View>
   );
