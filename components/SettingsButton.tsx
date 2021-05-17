@@ -5,5 +5,9 @@ import { View } from "react-native";
 import { tongueRed } from "../styles/AppTheme";
 
 export default function SettingsButton() {
-  return <FontAwesomeIcon icon={faCog} size={40} />;
+  return (
+    <View style={{  }}>
+      <FontAwesomeIcon icon={faCog} size={40} />
+    </View>
+  );
 }

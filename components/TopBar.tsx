@@ -4,7 +4,6 @@ import { tongueRed } from "../styles/AppTheme";
 import Level from "./Level";
 import SettingsButton from "./SettingsButton";
 
-
 export default function TopBar() {
   return (
     <View
@@ -25,7 +24,7 @@ export default function TopBar() {
         <Text>to</Text>
       </View>
       <View style={{ flex: 1 }}>
-        <Text><SettingsButton/></Text>
+          <SettingsButton />
       </View>
     </View>
   );
