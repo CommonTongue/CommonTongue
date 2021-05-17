@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { Modal, Text, TouchableOpacity, View } from "react-native";
 import ModalContext from "../contexts/ModalContext";
-import { bottomBarColor, commonBlue, tongueRed } from "../styles/AppTheme";
-import BottomPadding, { bottomPaddingHeight } from "./BottomPadding";
+import { bottomBarColor, commonBlue } from "../styles/AppTheme";
+import { bottomPaddingHeight } from "./BottomPadding";
 import { topPaddingHeight } from "./TopPadding";
 
 export default function GlobalModal() {

@@ -1,5 +1,5 @@
-import React, { useState, useContext, createContext } from "react";
-import { Modal, StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, View } from "react-native";
 import TopPadding from "./components/TopPadding";
 import BottomPadding from "./components/BottomPadding";
 import TopBar from "./components/TopBar";
