@@ -13,6 +13,14 @@ export default function App() {
     showModal: false,
     modalContent: undefined,
   } as { showModal: boolean; modalContent: ModalContentSchema });
+
+  const defaultLearnLanguage = "";
+  const defaultTranslateLanguage = "";
+  
+  const [learnLanguage, setLearnLanguage] = useState(defaultLearnLanguage);
+  const [translateLanguage, setTranslateLanguage] = useState(
+    defaultTranslateLanguage
+  );
   return (
     <View style={styles.container}>
       <ModalContext.Provider
