@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text } from "react-native";
 import LanguagePicker from "./LanguagePicker";
 
-export default function ChooseLearnLanguage() {
+export default function ChooseTranslateLanguage() {
   return (
     <View
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
@@ -15,7 +15,7 @@ export default function ChooseLearnLanguage() {
             textAlign: "center",
           }}
         >
-          choose a language to learn
+          choose a language to translate to
         </Text>
       </View>
       <View style={{ width: "100%" }}>
