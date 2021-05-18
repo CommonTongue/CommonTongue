@@ -32,7 +32,7 @@ export default function GlobalModal() {
         }}
       >
         {/** A slab to pad inserted items uniformly */}
-        <View>
+        <View style={{ width: "80%" }}>
           <View style={{ height: 30 }} />
           {useModal.modalContent}
         </View>
@@ -40,8 +40,8 @@ export default function GlobalModal() {
         <TouchableOpacity
           onPress={() => useModal.toggleModal(false, undefined)}
           style={{
-            width: "80%",
             height: "10%",
+            width: "80%",
             backgroundColor: commonBlue,
             borderRadius: 10,
             display: "flex",
