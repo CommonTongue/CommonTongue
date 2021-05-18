@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
 import { Text, TouchableOpacity } from "react-native";
+import { LearnContext } from "../contexts/LanguageContext";
 import ModalContext from "../contexts/ModalContext";
 import { commonBlue, whiteBackground } from "../styles/AppTheme";
 import ChooseLearnLanguage from "./ChooseLearnLanguage";
 
 export default function LearnLanguage() {
   const useModal = useContext(ModalContext);
+  const useLearn = useContext(LearnContext);
   return (
     <TouchableOpacity
       style={{
@@ -23,7 +25,7 @@ export default function LearnLanguage() {
       }}
     >
       <Text style={{ color: whiteBackground, fontWeight: "bold" }}>
-        ENGLISH
+        {useLearn.language}
       </Text>
     </TouchableOpacity>
   );

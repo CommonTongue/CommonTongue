@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text } from "react-native";
+import { LearnContext } from "../contexts/LanguageContext";
 import LanguagePicker from "./LanguagePicker";
 
 export default function ChooseLearnLanguage() {
+  const useLearn = useContext(LearnContext);
   return (
     <View
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
@@ -22,6 +24,7 @@ export default function ChooseLearnLanguage() {
         <LanguagePicker
           onLanguagePick={(value) => {
             const selectedLanguage = value as string;
+            useLearn.setLanguage(selectedLanguage);
           }}
         />
       </View>

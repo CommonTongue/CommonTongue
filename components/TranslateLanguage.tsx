@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
 import { Text, TouchableOpacity } from "react-native";
+import { TranslateContext } from "../contexts/LanguageContext";
 import ModalContext from "../contexts/ModalContext";
 import { commonBlue, whiteBackground } from "../styles/AppTheme";
 import ChooseTranslateLanguage from "./ChooseTranslateLanguage";
 
 export default function TranslateLanguage() {
+  const useTranslate = useContext(TranslateContext);
   const useModal = useContext(ModalContext);
 
   return (
@@ -24,7 +26,7 @@ export default function TranslateLanguage() {
       }}
     >
       <Text style={{ color: whiteBackground, fontWeight: "bold" }}>
-        LITHUANIAN
+        {useTranslate.language}
       </Text>
     </TouchableOpacity>
   );

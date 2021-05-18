@@ -7,6 +7,7 @@ import BottomBar from "./components/BottomBar";
 import Center from "./components/Center";
 import ModalContext, { ModalContentSchema } from "./contexts/ModalContext";
 import GlobalModal from "./components/GlobalModal";
+import { LearnContext, TranslateContext } from "./contexts/LanguageContext";
 
 export default function App() {
   const [modalState, setModalState] = useState({
@@ -14,9 +15,10 @@ export default function App() {
     modalContent: undefined,
   } as { showModal: boolean; modalContent: ModalContentSchema });
 
-  const defaultLearnLanguage = "";
-  const defaultTranslateLanguage = "";
-  
+  const defaultLearnLanguage = localStorage.getItem("learnLanguage") || "?";
+  const defaultTranslateLanguage =
+    localStorage.getItem("translateLanguage") || "?";
+
   const [learnLanguage, setLearnLanguage] = useState(defaultLearnLanguage);
   const [translateLanguage, setTranslateLanguage] = useState(
     defaultTranslateLanguage
@@ -35,12 +37,32 @@ export default function App() {
           },
         }}
       >
-        <TopPadding />
-        <GlobalModal />
-        <TopBar />
-        <Center />
-        <BottomBar />
-        <BottomPadding />
+        <LearnContext.Provider
+          value={{
+            language: learnLanguage,
+            setLanguage: (newLanguage) => {
+              localStorage.setItem("learnLanguage", newLanguage);
+              setLearnLanguage(newLanguage);
+            },
+          }}
+        >
+          <TranslateContext.Provider
+            value={{
+              language: translateLanguage,
+              setLanguage: (newLanguage) => {
+                localStorage.setItem("translateLanguage", newLanguage);
+                setTranslateLanguage(newLanguage);
+              },
+            }}
+          >
+            <TopPadding />
+            <GlobalModal />
+            <TopBar />
+            <Center />
+            <BottomBar />
+            <BottomPadding />
+          </TranslateContext.Provider>
+        </LearnContext.Provider>
       </ModalContext.Provider>
     </View>
   );
