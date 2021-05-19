@@ -14,14 +14,9 @@ export default function Card(props: {
     cardRef?.flip();
   };
   return (
-    <View
-      style={{ width: "80%", flex: 1, marginTop: "10%", marginBottom: "10%" }}
-    >
+    <View style={styles.container}>
       <CardFlip
-        style={{
-          height: "100%",
-          width: "100%",
-        }}
+        style={styles.cardFlip}
         ref={(card: CardFlip | null) => {
           cardRef = card;
         }}
@@ -65,6 +60,11 @@ export default function Card(props: {
   );
 }
 const styles = StyleSheet.create({
+  container: { width: "100%", height: "100%" },
+  cardFlip: {
+    height: "100%",
+    width: "100%",
+  },
   cardInner: {
     height: "100%",
     width: "100%",
