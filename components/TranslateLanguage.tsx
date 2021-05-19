@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Text, TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity, StyleSheet } from "react-native";
 import { TranslateContext } from "../contexts/LanguageContext";
 import ModalContext from "../contexts/ModalContext";
 import { commonBlue, whiteBackground } from "../styles/AppTheme";
@@ -11,23 +11,26 @@ export default function TranslateLanguage() {
 
   return (
     <TouchableOpacity
-      style={{
-        flex: 1,
-        width: "80%",
-        backgroundColor: commonBlue,
-        borderRadius: 10,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
+      style={styles.button}
       activeOpacity={0.8}
       onPress={() => {
         useModal.toggleModal(true, <ChooseTranslateLanguage />);
       }}
     >
-      <Text style={{ color: whiteBackground, fontWeight: "bold" }}>
-        {useTranslate.language}
-      </Text>
+      <Text style={styles.text}>{useTranslate.language}</Text>
     </TouchableOpacity>
   );
 }
+
+const styles = StyleSheet.create({
+  button: {
+    flex: 1,
+    width: "80%",
+    backgroundColor: commonBlue,
+    borderRadius: 10,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  text: { color: whiteBackground, fontWeight: "bold" },
+});
