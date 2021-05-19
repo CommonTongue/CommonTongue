@@ -1,14 +1,18 @@
-import React, { createRef } from "react";
-import { TouchableOpacity, View } from "react-native";
-import { commonBlue, tongueRed, whiteBackground } from "../styles/AppTheme";
+import React from "react";
+import { View, StyleSheet } from "react-native";
+import { commonBlue, tongueRed } from "../styles/AppTheme";
 import CardFlip from "react-native-card-flip";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 export default function Card(props: {
   firstSide: React.ReactNode;
+  firstSideButton: React.ReactNode;
   secondSide: React.ReactNode;
 }) {
   let cardRef: CardFlip | null = null;
+  const flipCard = () => {
+    cardRef?.flip();
+  };
   return (
     <View
       style={{ width: "80%", flex: 1, marginTop: "10%", marginBottom: "10%" }}
@@ -23,52 +27,33 @@ export default function Card(props: {
         }}
         duration={500}
       >
-        <TouchableWithoutFeedback
-          style={{ height: "100%", width: "100%" }}
-          onPress={() => {
-            cardRef?.flip();
-          }}
-        >
-          <View
-            style={{
-              height: "100%",
-              width: "100%",
-              borderRadius: 10,
-              backgroundColor: commonBlue,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              shadowOffset: { height: 1, width: 1 },
-              shadowOpacity: 0.8,
-              shadowRadius: 10,
-              shadowColor: commonBlue,
-            }}
-            // @ts-ignore
-            elevation={8}
-          >
-            {props.firstSide}
+        <View style={[styles.cardInner, styles.firstSide]}>
+          <View style={styles.touchableEndsContainer}>
+            <TouchableWithoutFeedback
+              style={styles.touchableEnds}
+              onPress={flipCard}
+            />
           </View>
-        </TouchableWithoutFeedback>
-        <TouchableWithoutFeedback
-          style={{ height: "100%", width: "100%" }}
-          onPress={() => {
-            cardRef?.flip();
-          }}
-        >
+          {props.firstSideButton}
+          <TouchableWithoutFeedback style={styles.touchable} onPress={flipCard}>
+            <View
+              // @ts-ignore
+              elevation={8}
+            >
+              {props.firstSide}
+            </View>
+          </TouchableWithoutFeedback>
+          <View style={styles.touchableEndsContainer}>
+            <TouchableWithoutFeedback
+              style={styles.touchableEnds}
+              onPress={flipCard}
+            />
+          </View>
+        </View>
+
+        <TouchableWithoutFeedback style={styles.touchable} onPress={flipCard}>
           <View
-            style={{
-              height: "100%",
-              width: "100%",
-              borderRadius: 10,
-              backgroundColor: tongueRed,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              shadowOffset: { height: 1, width: 1 },
-              shadowOpacity: 0.8,
-              shadowRadius: 10,
-              shadowColor: tongueRed,
-            }}
+            style={[styles.cardInner, styles.secondSide]}
             // @ts-ignore
             elevation={8}
           >
@@ -79,3 +64,27 @@ export default function Card(props: {
     </View>
   );
 }
+const styles = StyleSheet.create({
+  cardInner: {
+    height: "100%",
+    width: "100%",
+    borderRadius: 10,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    shadowOffset: { height: 1, width: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 10,
+  },
+  firstSide: {
+    shadowColor: commonBlue,
+    backgroundColor: commonBlue,
+  },
+  secondSide: {
+    backgroundColor: tongueRed,
+    shadowColor: tongueRed,
+  },
+  touchable: { width: "100%" },
+  touchableEnds: { width: "100%", height: "100%" },
+  touchableEndsContainer: { flex: 1, width: "100%" },
+});
