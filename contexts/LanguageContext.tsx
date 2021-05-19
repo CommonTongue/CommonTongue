@@ -13,3 +13,8 @@ export const TranslateContext = createContext({
   language: "",
   setLanguage: (newLanguage: string) => {},
 } as LanguageContextSchema);
+
+export const translateLanguageLocalKey = "translateLanguage";
+export const learnLanguageLocalKey = "learnLanguage";
+export const defaultLearnLanguageValue = "language to learn"
+export const defaultTranslateLanguageValue = "translation language"

@@ -7,7 +7,16 @@ import BottomBar from "./components/BottomBar";
 import Center from "./components/Center";
 import ModalContext, { ModalContentSchema } from "./contexts/ModalContext";
 import GlobalModal from "./components/GlobalModal";
-import { LearnContext, TranslateContext } from "./contexts/LanguageContext";
+import {
+  LearnContext,
+  learnLanguageLocalKey,
+  TranslateContext,
+  translateLanguageLocalKey,
+  defaultLearnLanguage,
+  defaultTranslateLanguage,
+  defaultLearnLanguageValue,
+  defaultTranslateLanguageValue,
+} from "./contexts/LanguageContext";
 
 export default function App() {
   const [modalState, setModalState] = useState({
@@ -15,9 +24,8 @@ export default function App() {
     modalContent: undefined,
   } as { showModal: boolean; modalContent: ModalContentSchema });
 
-  const defaultLearnLanguage = localStorage.getItem("learnLanguage") || "?";
-  const defaultTranslateLanguage =
-    localStorage.getItem("translateLanguage") || "?";
+  const defaultLearnLanguage: string = defaultLearnLanguageValue;
+  const defaultTranslateLanguage: string = defaultTranslateLanguageValue;
 
   const [learnLanguage, setLearnLanguage] = useState(defaultLearnLanguage);
   const [translateLanguage, setTranslateLanguage] = useState(
@@ -41,7 +49,6 @@ export default function App() {
           value={{
             language: learnLanguage,
             setLanguage: (newLanguage) => {
-              localStorage.setItem("learnLanguage", newLanguage);
               setLearnLanguage(newLanguage);
             },
           }}
@@ -50,7 +57,6 @@ export default function App() {
             value={{
               language: translateLanguage,
               setLanguage: (newLanguage) => {
-                localStorage.setItem("translateLanguage", newLanguage);
                 setTranslateLanguage(newLanguage);
               },
             }}

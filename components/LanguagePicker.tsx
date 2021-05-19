@@ -9,15 +9,44 @@ import { useState } from "react";
 import DropDownPicker, { ValueType } from "react-native-dropdown-picker";
 import { commonBlue, tongueRed, whiteBackground } from "../styles/AppTheme";
 
+const supportedLanguages = [
+  "German",
+  "Belarusian",
+  "Amharic",
+  "Czech",
+  "Portuguese",
+  "Spanish",
+  "Urdu",
+  "Italian",
+  "Hebrew",
+  "Hindi",
+  "Russian",
+  "Azerbaijani",
+  "Dutch",
+  "Korean",
+  "Bulgarian",
+  "Arabic",
+  "French",
+  "Indonesian",
+  "Bosnian",
+  "Bengali",
+  "Afrikaans",
+  "Greek",
+  "Turkish",
+  "Vietnamese",
+  "English",
+];
 export default function LanguagePicker(props: {
   onLanguagePick: (value: ValueType) => void;
 }) {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
-  const [items, setItems] = useState([
-    { label: "English", value: "apple" },
-    { label: "Turkish", value: "banana" },
-  ]);
+  const [items, setItems] = useState(
+    supportedLanguages.map((language: string) => {
+      return { label: language, value: language };
+    })
+  );
+
   return (
     <DropDownPicker
       containerStyle={{
