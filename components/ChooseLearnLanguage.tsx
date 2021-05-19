@@ -1,26 +1,16 @@
 import React, { useContext } from "react";
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { LearnContext } from "../contexts/LanguageContext";
 import LanguagePicker from "./LanguagePicker";
 
 export default function ChooseLearnLanguage() {
   const useLearn = useContext(LearnContext);
   return (
-    <View
-      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-    >
+    <View style={styles.container}>
       <View>
-        <Text
-          style={{
-            fontSize: 30,
-            fontWeight: "bold",
-            textAlign: "center",
-          }}
-        >
-          choose a language to learn
-        </Text>
+        <Text style={styles.title}>choose a language to learn</Text>
       </View>
-      <View style={{ width: "100%" }}>
+      <View style={styles.pickerContainer}>
         <LanguagePicker
           onLanguagePick={(value) => {
             const selectedLanguage = value as string;
@@ -31,3 +21,13 @@ export default function ChooseLearnLanguage() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: { display: "flex", flexDirection: "column", alignItems: "center" },
+  title: {
+    fontSize: 30,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  pickerContainer: { width: "100%" },
+});
