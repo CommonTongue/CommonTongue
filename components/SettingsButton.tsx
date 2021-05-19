@@ -10,7 +10,7 @@ export default function SettingsButton() {
       style={{
         flex: 1,
         justifyContent: "center",
-        alignItems: "center",
+        alignItems: "flex-end",
       }}
     >
       <FontAwesomeIcon icon={faCog} size={40} color={whiteBackground} />

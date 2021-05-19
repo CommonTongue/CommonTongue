@@ -25,9 +25,10 @@ export default function TranslateLanguage() {
 const styles = StyleSheet.create({
   button: {
     flex: 1,
-    width: "80%",
+    width: "100%",
     backgroundColor: commonBlue,
     borderRadius: 10,
+    marginLeft: 10,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",

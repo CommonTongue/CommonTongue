@@ -24,7 +24,8 @@ export default function LearnLanguage() {
 const styles = StyleSheet.create({
   button: {
     flex: 1,
-    width: "80%",
+    width: "100%",
+    marginRight: 10,
     backgroundColor: commonBlue,
     borderRadius: 10,
     display: "flex",
