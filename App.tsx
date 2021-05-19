@@ -9,11 +9,7 @@ import ModalContext, { ModalContentSchema } from "./contexts/ModalContext";
 import GlobalModal from "./components/GlobalModal";
 import {
   LearnContext,
-  learnLanguageLocalKey,
   TranslateContext,
-  translateLanguageLocalKey,
-  defaultLearnLanguage,
-  defaultTranslateLanguage,
   defaultLearnLanguageValue,
   defaultTranslateLanguageValue,
 } from "./contexts/LanguageContext";
