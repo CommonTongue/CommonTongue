@@ -35,7 +35,7 @@ const supportedLanguages = [
   "Turkish",
   "Vietnamese",
   "English",
-];
+].sort();
 export default function LanguagePicker(props: {
   onLanguagePick: (value: ValueType) => void;
 }) {

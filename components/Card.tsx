@@ -21,6 +21,7 @@ export default function Card(props: {
         ref={(card: CardFlip | null) => {
           cardRef = card;
         }}
+        duration={500}
       >
         <TouchableWithoutFeedback
           style={{ height: "100%", width: "100%" }}
@@ -33,7 +34,7 @@ export default function Card(props: {
               height: "100%",
               width: "100%",
               borderRadius: 10,
-              backgroundColor: whiteBackground,
+              backgroundColor: commonBlue,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -59,14 +60,14 @@ export default function Card(props: {
               height: "100%",
               width: "100%",
               borderRadius: 10,
-              backgroundColor: whiteBackground,
+              backgroundColor: tongueRed,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               shadowOffset: { height: 1, width: 1 },
               shadowOpacity: 0.8,
               shadowRadius: 10,
-              shadowColor: commonBlue,
+              shadowColor: tongueRed,
             }}
             // @ts-ignore
             elevation={8}
