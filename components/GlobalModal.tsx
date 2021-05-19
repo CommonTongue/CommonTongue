@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Modal, Text, TouchableOpacity, View } from "react-native";
+import { Modal, Text, TouchableOpacity, View, StyleSheet } from "react-native";
 import ModalContext from "../contexts/ModalContext";
 import { bottomBarColor, commonBlue } from "../styles/AppTheme";
 import { bottomPaddingHeight } from "./BottomPadding";
@@ -15,50 +15,47 @@ export default function GlobalModal() {
       onRequestClose={() => {
         useModal.toggleModal(false, undefined);
       }}
-      style={{
-        alignItems: "center",
-        justifyContent: "center",
-      }}
+      style={styles.modal}
     >
-      <View
-        style={{
-          backgroundColor: bottomBarColor,
-          marginTop: topPaddingHeight,
-          marginBottom: bottomPaddingHeight,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          flex: 1,
-        }}
-      >
-        {/** A slab to pad inserted items uniformly */}
-        <View style={{ width: "80%" }}>
-          <View style={{ height: 30 }} />
-          {useModal.modalContent}
-        </View>
-
+      <View style={styles.modalInner}>
+        <View style={styles.contentHolder}>{useModal.modalContent}</View>
         <TouchableOpacity
           onPress={() => useModal.toggleModal(false, undefined)}
-          style={{
-            height: "10%",
-            width: "80%",
-            backgroundColor: commonBlue,
-            borderRadius: 10,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
+          style={styles.closeButton}
         >
-          <Text
-            style={{
-              color: "white",
-              fontWeight: "bold",
-            }}
-          >
-            Close
-          </Text>
+          <Text style={styles.closeButtonText}>Close</Text>
         </TouchableOpacity>
       </View>
     </Modal>
   );
 }
+
+const styles = StyleSheet.create({
+  modal: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  modalInner: {
+    backgroundColor: bottomBarColor,
+    marginTop: topPaddingHeight,
+    marginBottom: bottomPaddingHeight,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    flex: 1,
+  },
+  contentHolder: { width: "80%", marginTop: 30 },
+  closeButton: {
+    height: "10%",
+    width: "80%",
+    backgroundColor: commonBlue,
+    borderRadius: 10,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  closeButtonText: {
+    color: "white",
+    fontWeight: "bold",
+  },
+});
