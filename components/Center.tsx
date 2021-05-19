@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, Animated } from "react-native";
+import { Text, View, Animated, StyleSheet } from "react-native";
 import { whiteBackground } from "../styles/AppTheme";
 import Card from "./Card";
 import PronounceButton from "./PronounceButton";
@@ -12,42 +12,18 @@ export default function Center() {
     { vocab: "vocab 4", translation: "translation 4" },
   ];
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: whiteBackground,
-        alignItems: "center",
-        flexDirection: "column",
-        justifyContent: "center",
-        display: "flex",
-      }}
-    >
-      <Animated.View style={{ width: "80%", height: "80%" }}>
+    <View style={styles.container}>
+      <Animated.View style={styles.actionFrame}>
         <Card
           firstSide={
-            <View
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Text style={{ fontSize: 40 }}>sample</Text>
-              {/** Padding between word and pronounce */}
-              <View style={{ height: "5%" }} />
+            <View style={styles.side}>
+              <Text style={styles.vocabText}>sample</Text>
             </View>
           }
           firstSideButton={<PronounceButton />}
           secondSide={
-            <View
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Text style={{ fontSize: 40 }}>translation</Text>
-              {/** Padding between word and pronounce */}
+            <View style={styles.side}>
+              <Text style={styles.translationText}>translation</Text>
             </View>
           }
         />
@@ -55,3 +31,22 @@ export default function Center() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: whiteBackground,
+    alignItems: "center",
+    flexDirection: "column",
+    justifyContent: "center",
+    display: "flex",
+  },
+  actionFrame: { width: "80%", height: "80%" },
+  side: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  vocabText: { fontSize: 40, marginBottom: 10 },
+  translationText: { fontSize: 40 },
+});
