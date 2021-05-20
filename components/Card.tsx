@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { commonBlue, darkBackground, tongueRed } from "../styles/AppTheme";
 import CardFlip from "react-native-card-flip";
@@ -12,8 +12,9 @@ export default function Card(props: {
   feedback?: React.ReactNode;
 }) {
   let cardRef: CardFlip | null = null;
+  const [currentSide, setCurrentSide] = useState(0);
   const flipCard = () => {
-    cardRef?.flip();
+    // cardRef?.flip();
   };
   return (
     <View style={styles.container}>

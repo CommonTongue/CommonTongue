@@ -27,29 +27,25 @@ export default function Center() {
     { vocab: "vocab 2", translation: "translation 2" },
     { vocab: "vocab 3", translation: "translation 3" },
     { vocab: "vocab 4", translation: "translation 4" },
-  ].reverse();
-
+  ];
   const cardPosition = new Animated.ValueXY();
-  useEffect(() => {
-    cardPosition.setOffset({ x: 0, y: 0 });
-  }, [currentCardIndex]);
   const panResponder = PanResponder.create({
     onStartShouldSetPanResponder: (panEvent, gestureState) => true,
     onPanResponderMove: (panEvent, gestureState) => {
       cardPosition.setValue({ x: gestureState.dx, y: gestureState.dy });
     },
     onPanResponderRelease: (panEvent, gestureState) => {
-      if (gestureState.dx > 120) {
+      if (gestureState.dx > CENTER_WIDTH / 2) {
         Animated.spring(cardPosition, {
           useNativeDriver: true,
           toValue: { x: CENTER_WIDTH + 100, y: gestureState.dy },
         }).start(() => {
           setCurrentCardIndex(currentCardIndex + 1);
         });
-      } else if (gestureState.dx < -120) {
+      } else if (gestureState.dx < -CENTER_WIDTH / 2) {
         Animated.spring(cardPosition, {
           useNativeDriver: true,
-          toValue: { x: CENTER_WIDTH - 100, y: gestureState.dy },
+          toValue: { x: -CENTER_WIDTH - 100, y: gestureState.dy },
         }).start(() => {
           setCurrentCardIndex(currentCardIndex + 1);
         });
@@ -85,6 +81,9 @@ export default function Center() {
     outputRange: [0, 0, 1],
     extrapolate: "clamp",
   });
+  useEffect(() => {
+    cardPosition.setValue({ x: 0, y: 0 });
+  }, [currentCardIndex]);
 
   const nextCardOpacity = cardPosition.x.interpolate({
     inputRange: [-CENTER_WIDTH / 2, 0, CENTER_WIDTH / 2],
@@ -106,14 +105,10 @@ export default function Center() {
   );
   return (
     <View style={styles.container}>
-      {currentCardIndex >= cardContents.length && (
-        <OutOfVocab/>
-      )}
+      {currentCardIndex >= cardContents.length && <OutOfVocab />}
       {currentCardIndex < cardContents.length &&
         cardContents.map((cardContent, cardIndex) => {
-          if (cardIndex > currentCardIndex) {
-            return undefined;
-          } else if (cardIndex < currentCardIndex) {
+          if (cardIndex == currentCardIndex + 1) {
             return (
               <Animated.View
                 style={[
@@ -139,11 +134,11 @@ export default function Center() {
                       </Text>
                     </View>
                   }
-                  glow={false}
+                  glow={true}
                 />
               </Animated.View>
             );
-          } else {
+          } else if (cardIndex == currentCardIndex) {
             return (
               <Animated.View
                 {...panResponder.panHandlers}
@@ -169,6 +164,8 @@ export default function Center() {
                 />
               </Animated.View>
             );
+          } else {
+            return undefined;
           }
         })}
     </View>
