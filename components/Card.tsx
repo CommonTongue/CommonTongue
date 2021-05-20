@@ -14,7 +14,7 @@ export default function Card(props: {
   let cardRef: CardFlip | null = null;
   const [currentSide, setCurrentSide] = useState(0);
   const flipCard = () => {
-    // cardRef?.flip();
+    cardRef?.flip();
   };
   return (
     <View style={styles.container}>
@@ -63,6 +63,7 @@ function CardFirstSide(props: {
         <TouchableWithoutFeedback
           style={[styles.touchableEnds]}
           onPress={props.flipCard}
+          onLongPress={() => {}}
         >
           {props.feedback}
         </TouchableWithoutFeedback>
@@ -73,6 +74,7 @@ function CardFirstSide(props: {
       <TouchableWithoutFeedback
         style={styles.touchable}
         onPress={props.flipCard}
+        onLongPress={() => {}}
       >
         <View
           // @ts-ignore
@@ -85,6 +87,7 @@ function CardFirstSide(props: {
         <TouchableWithoutFeedback
           style={styles.touchableEnds}
           onPress={props.flipCard}
+          onLongPress={() => {}}
         />
       </View>
     </View>
@@ -98,7 +101,11 @@ function CardSecondSide(props: {
   flipCard: () => void;
 }) {
   return (
-    <TouchableWithoutFeedback style={styles.touchable} onPress={props.flipCard}>
+    <TouchableWithoutFeedback
+      style={styles.touchable}
+      onPress={props.flipCard}
+      onLongPress={() => {}}
+    >
       <View
         style={[
           styles.cardInner,
