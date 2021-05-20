@@ -113,7 +113,7 @@ function CardSecondSide(props: {
         // @ts-ignore
         elevation={props.glow ? 8 : 0}
       >
-        <View style={styles.feedbackContainer}>{props.feedback}</View>
+        <View>{props.feedback}</View>
         <View style={styles.secondSideContainer}>{props.secondSide}</View>
       </View>
     </TouchableWithoutFeedback>
