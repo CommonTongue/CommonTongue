@@ -1,7 +1,7 @@
 import { transform } from "@babel/core";
 import { faThumbsDown, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Text,
   View,
@@ -14,13 +14,14 @@ import { whiteBackground } from "../styles/AppTheme";
 import Card from "./Card";
 import DontKnowFeedback from "./DontKnowFeedback";
 import KnowFeedback from "./KnowFeedback";
+import OutOfVocab from "./OutOfVocab";
 import PronounceButton from "./PronounceButton";
 
 const CENTER_HEIGHT = Dimensions.get("window").height;
 const CENTER_WIDTH = Dimensions.get("window").width;
 
 export default function Center() {
-  const [currentCardIndex, setCurrentCardIndex] = useState(2);
+  const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const cardContents = [
     { vocab: "vocab 1", translation: "translation 1" },
     { vocab: "vocab 2", translation: "translation 2" },
@@ -29,12 +30,37 @@ export default function Center() {
   ].reverse();
 
   const cardPosition = new Animated.ValueXY();
+  useEffect(() => {
+    cardPosition.setOffset({ x: 0, y: 0 });
+  }, [currentCardIndex]);
   const panResponder = PanResponder.create({
     onStartShouldSetPanResponder: (panEvent, gestureState) => true,
     onPanResponderMove: (panEvent, gestureState) => {
       cardPosition.setValue({ x: gestureState.dx, y: gestureState.dy });
     },
-    onPanResponderRelease: (panEvent, gestureState) => {},
+    onPanResponderRelease: (panEvent, gestureState) => {
+      if (gestureState.dx > 120) {
+        Animated.spring(cardPosition, {
+          useNativeDriver: true,
+          toValue: { x: CENTER_WIDTH + 100, y: gestureState.dy },
+        }).start(() => {
+          setCurrentCardIndex(currentCardIndex + 1);
+        });
+      } else if (gestureState.dx < -120) {
+        Animated.spring(cardPosition, {
+          useNativeDriver: true,
+          toValue: { x: CENTER_WIDTH - 100, y: gestureState.dy },
+        }).start(() => {
+          setCurrentCardIndex(currentCardIndex + 1);
+        });
+      } else {
+        Animated.spring(cardPosition, {
+          useNativeDriver: true,
+          toValue: { x: 0, y: 0 },
+          friction: 4,
+        }).start(() => {});
+      }
+    },
   });
   const cardRotation = cardPosition.x.interpolate({
     inputRange: [-CENTER_WIDTH / 2, 0, CENTER_WIDTH / 2],
@@ -60,6 +86,18 @@ export default function Center() {
     extrapolate: "clamp",
   });
 
+  const nextCardOpacity = cardPosition.x.interpolate({
+    inputRange: [-CENTER_WIDTH / 2, 0, CENTER_WIDTH / 2],
+    outputRange: [1, 0, 1],
+    extrapolate: "clamp",
+  });
+
+  const nextCardScale = cardPosition.x.interpolate({
+    inputRange: [-CENTER_WIDTH / 2, 0, CENTER_WIDTH / 2],
+    outputRange: [1, 0.4, 1],
+    extrapolate: "clamp",
+  });
+
   const feedbackLabel = (
     <View style={{ margin: 30 }}>
       <KnowFeedback opacity={knowFeedbackOpacity} />
@@ -68,61 +106,71 @@ export default function Center() {
   );
   return (
     <View style={styles.container}>
-      {cardContents.map((cardContent, cardIndex) => {
-        if (cardIndex > currentCardIndex) {
-          return undefined;
-        } else if (cardIndex < currentCardIndex) {
-          return (
-            <Animated.View
-              style={[styles.actionFrame]}
-              key={`animated-card-${cardIndex}`}
-            >
-              <Card
-                firstSide={
-                  <View style={styles.side}>
-                    <Text style={styles.vocabText}>{cardContent.vocab}</Text>
-                  </View>
-                }
-                firstSideButton={<PronounceButton />}
-                secondSide={
-                  <View style={styles.side}>
-                    <Text style={styles.translationText}>
-                      {cardContent.translation}
-                    </Text>
-                  </View>
-                }
-                glow={false}
-              />
-            </Animated.View>
-          );
-        } else {
-          return (
-            <Animated.View
-              {...panResponder.panHandlers}
-              style={[styles.actionFrame, cardRotateTranslate]}
-              key={`animated-card-${cardIndex}`}
-            >
-              <Card
-                firstSide={
-                  <View style={styles.side}>
-                    <Text style={styles.vocabText}>{cardContent.vocab}</Text>
-                  </View>
-                }
-                firstSideButton={<PronounceButton />}
-                secondSide={
-                  <View style={styles.side}>
-                    <Text style={styles.translationText}>
-                      {cardContent.translation}
-                    </Text>
-                  </View>
-                }
-                glow={true}
-                feedback={feedbackLabel}
-              />
-            </Animated.View>
-          );
-        }
-      })}
+      {currentCardIndex >= cardContents.length && (
+        <OutOfVocab/>
+      )}
+      {currentCardIndex < cardContents.length &&
+        cardContents.map((cardContent, cardIndex) => {
+          if (cardIndex > currentCardIndex) {
+            return undefined;
+          } else if (cardIndex < currentCardIndex) {
+            return (
+              <Animated.View
+                style={[
+                  styles.actionFrame,
+                  {
+                    opacity: nextCardOpacity,
+                    transform: [{ scale: nextCardScale }],
+                  },
+                ]}
+                key={`animated-card-${cardIndex}`}
+              >
+                <Card
+                  firstSide={
+                    <View style={styles.side}>
+                      <Text style={styles.vocabText}>{cardContent.vocab}</Text>
+                    </View>
+                  }
+                  firstSideButton={<PronounceButton />}
+                  secondSide={
+                    <View style={styles.side}>
+                      <Text style={styles.translationText}>
+                        {cardContent.translation}
+                      </Text>
+                    </View>
+                  }
+                  glow={false}
+                />
+              </Animated.View>
+            );
+          } else {
+            return (
+              <Animated.View
+                {...panResponder.panHandlers}
+                style={[styles.actionFrame, cardRotateTranslate]}
+                key={`animated-card-${cardIndex}`}
+              >
+                <Card
+                  firstSide={
+                    <View style={styles.side}>
+                      <Text style={styles.vocabText}>{cardContent.vocab}</Text>
+                    </View>
+                  }
+                  firstSideButton={<PronounceButton />}
+                  secondSide={
+                    <View style={styles.side}>
+                      <Text style={styles.translationText}>
+                        {cardContent.translation}
+                      </Text>
+                    </View>
+                  }
+                  glow={true}
+                  feedback={feedbackLabel}
+                />
+              </Animated.View>
+            );
+          }
+        })}
     </View>
   );
 }
