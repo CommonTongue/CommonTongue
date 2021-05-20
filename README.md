@@ -6,10 +6,9 @@
 - connect backend
 - make pay function
 - make login page
-- make favorite function
+- make learn mode
 - make settings
 - make theme
-- make learn mode
 
 ## Backend TODO
 

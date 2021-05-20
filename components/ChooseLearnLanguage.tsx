@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { LearnContext } from "../contexts/LanguageContext";
+import { tongueRed } from "../styles/AppTheme";
 import LanguagePicker from "./LanguagePicker";
 
 export default function ChooseLearnLanguage() {
@@ -28,6 +29,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     textAlign: "center",
+    color: tongueRed,
   },
   pickerContainer: { width: "100%" },
 });

@@ -20,10 +20,10 @@ export default function OutOfVocab() {
           textAlign: "center",
         }}
       >
-        You're on fire!
+        you're on fire!
       </Text>
       <Text style={styles.text}>
-        We don't have any more words for you to memorize for now.
+        we don't have any more words for you to memorize for now.
       </Text>
     </View>
   );

@@ -17,7 +17,6 @@ import KnowFeedback from "./KnowFeedback";
 import OutOfVocab from "./OutOfVocab";
 import PronounceButton from "./PronounceButton";
 
-const CENTER_HEIGHT = Dimensions.get("window").height;
 const CENTER_WIDTH = Dimensions.get("window").width;
 
 export default function Center() {

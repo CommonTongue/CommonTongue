@@ -18,7 +18,7 @@ export default function KnowFeedback(props: {
 const styles = StyleSheet.create({
   knowFeedback: {
     position: "absolute",
-    zIndex: 1000,
+    zIndex: 100,
     width: "100%",
     alignItems: "flex-start",
   },

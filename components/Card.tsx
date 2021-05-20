@@ -12,7 +12,6 @@ export default function Card(props: {
   feedback?: React.ReactNode;
 }) {
   let cardRef: CardFlip | null = null;
-  const [currentSide, setCurrentSide] = useState(0);
   const flipCard = () => {
     cardRef?.flip();
   };
