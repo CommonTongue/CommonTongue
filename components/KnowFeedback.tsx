@@ -1,4 +1,4 @@
-import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+import { faLayerGroup } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import React from "react";
 import { Animated, StyleSheet } from "react-native";
@@ -10,7 +10,7 @@ export default function KnowFeedback(props: {
 }) {
   return (
     <Animated.View style={[styles.knowFeedback, { opacity: props.opacity }]}>
-      <FontAwesomeIcon icon={faThumbsUp} color={whiteBackground} size={40} />
+      <FontAwesomeIcon icon={faLayerGroup} color={whiteBackground} size={40} />
     </Animated.View>
   );
 }

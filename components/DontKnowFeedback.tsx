@@ -1,7 +1,7 @@
-import { faThumbsDown } from "@fortawesome/free-solid-svg-icons";
+import { faBan, faLayerGroup } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import React from "react";
-import { Animated, StyleSheet } from "react-native";
+import { Animated, StyleSheet, View } from "react-native";
 import { whiteBackground } from "../styles/AppTheme";
 
 export default function DontKnowFeedback(props: {
@@ -11,7 +11,7 @@ export default function DontKnowFeedback(props: {
     <Animated.View
       style={[styles.dontKnowFeedback, { opacity: props.opacity }]}
     >
-      <FontAwesomeIcon icon={faThumbsDown} color={whiteBackground} size={40} />
+      <FontAwesomeIcon icon={faBan} color={whiteBackground} size={40} />
     </Animated.View>
   );
 }

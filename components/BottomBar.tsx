@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
   faCompass,
   faGraduationCap,
-  faStar,
+  faLayerGroup,
 } from "@fortawesome/free-solid-svg-icons";
 import React, { useState } from "react";
 import { Text, View, StyleSheet, TouchableHighlight } from "react-native";
@@ -20,8 +20,8 @@ const tabs: TabSchema[] = [
     tabName: "explore",
   },
   {
-    tabThumbnail: faStar,
-    tabName: "favorite",
+    tabThumbnail: faLayerGroup,
+    tabName: "decks",
   },
   {
     tabThumbnail: faGraduationCap,

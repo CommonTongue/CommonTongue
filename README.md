@@ -2,7 +2,6 @@
 
 ## Frontend TODO
 
-- make swipe function
 - make levels
 - connect backend
 - make pay function
