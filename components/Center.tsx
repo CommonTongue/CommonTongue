@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { whiteBackground } from "../styles/AppTheme";
 import Card from "./Card";
+import DontKnowFeedback from "./DontKnowFeedback";
 import KnowFeedback from "./KnowFeedback";
 import PronounceButton from "./PronounceButton";
 
@@ -59,23 +60,10 @@ export default function Center() {
     extrapolate: "clamp",
   });
 
-  const dontKnowFeedbackLabel = (
-    <Animated.View
-      style={{
-        opacity: dontKnowFeedbackOpacity,
-        position: "absolute",
-        zIndex: 1000,
-        width: "100%",
-        alignItems: "flex-end",
-      }}
-    >
-      <FontAwesomeIcon icon={faThumbsDown} color={whiteBackground} size={40} />
-    </Animated.View>
-  );
   const feedbackLabel = (
     <View style={{ margin: 30 }}>
       <KnowFeedback opacity={knowFeedbackOpacity} />
-      {dontKnowFeedbackLabel}
+      <DontKnowFeedback opacity={dontKnowFeedbackOpacity} />
     </View>
   );
   return (
