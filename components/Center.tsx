@@ -1,9 +1,19 @@
 import { transform } from "@babel/core";
 import React, { useState } from "react";
-import { Text, View, Animated, StyleSheet, PanResponder } from "react-native";
+import {
+  Text,
+  View,
+  Animated,
+  StyleSheet,
+  PanResponder,
+  Dimensions,
+} from "react-native";
 import { whiteBackground } from "../styles/AppTheme";
 import Card from "./Card";
 import PronounceButton from "./PronounceButton";
+
+const CENTER_HEIGHT = Dimensions.get("window").height;
+const CENTER_WIDTH = Dimensions.get("window").width;
 
 export default function Center() {
   const [currentCardIndex, setCurrentCardIndex] = useState(2);
@@ -22,7 +32,17 @@ export default function Center() {
     },
     onPanResponderRelease: (panEvent, gestureState) => {},
   });
-
+  const cardRotation = cardPosition.x.interpolate({
+    inputRange: [-CENTER_WIDTH / 2, 0, CENTER_WIDTH / 2],
+    outputRange: ["-20deg", "0deg", "20deg"],
+    extrapolate: "clamp",
+  });
+  const cardRotateTranslate = {
+    transform: [
+      { rotate: cardRotation },
+      ...cardPosition.getTranslateTransform(),
+    ],
+  };
   return (
     <View style={styles.container}>
       {cardContents.map((cardContent, cardIndex) => {
@@ -56,10 +76,7 @@ export default function Center() {
           return (
             <Animated.View
               {...panResponder.panHandlers}
-              style={[
-                styles.actionFrame,
-                { transform: cardPosition.getTranslateTransform() },
-              ]}
+              style={[styles.actionFrame, cardRotateTranslate]}
               key={`animated-card-${cardIndex}`}
             >
               <Card

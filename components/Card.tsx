@@ -1,6 +1,11 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { commonBlue, tongueRed } from "../styles/AppTheme";
+import {
+  commonBlue,
+  darkBackground,
+  tongueRed,
+  whiteBackground,
+} from "../styles/AppTheme";
 import CardFlip from "react-native-card-flip";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
@@ -94,11 +99,11 @@ const styles = StyleSheet.create({
   firstSide: {
     backgroundColor: commonBlue,
   },
-  firstSideGlow: { shadowColor: commonBlue },
+  firstSideGlow: { shadowColor: darkBackground },
   secondSide: {
     backgroundColor: tongueRed,
   },
-  secondSideGlow: { shadowColor: tongueRed },
+  secondSideGlow: { shadowColor: darkBackground },
   touchable: { width: "100%" },
   touchableEnds: { width: "100%", height: "100%" },
   touchableEndsContainer: { flex: 1, width: "100%" },
