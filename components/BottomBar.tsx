@@ -42,13 +42,27 @@ export default function BottomBar() {
             key={`bottom-action-${tabIndex}`}
             onPress={() => setActiveTab(tabIndex)}
           >
-            <View>
+            <View
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "column",
+              }}
+            >
               <FontAwesomeIcon
                 size={40}
                 icon={tab.tabThumbnail}
                 color={tabColor}
               />
-              <Text style={{ color: tabColor }}>{tab.tabName}</Text>
+
+              <Text
+                style={{
+                  color: tabColor,
+                }}
+              >
+                {tab.tabName}
+              </Text>
             </View>
           </TouchableHighlight>
         );
@@ -68,5 +82,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    display: "flex",
   },
 });
