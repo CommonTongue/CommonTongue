@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { whiteBackground } from "../styles/AppTheme";
 import Card from "./Card";
+import KnowFeedback from "./KnowFeedback";
 import PronounceButton from "./PronounceButton";
 
 const CENTER_HEIGHT = Dimensions.get("window").height;
@@ -58,19 +59,6 @@ export default function Center() {
     extrapolate: "clamp",
   });
 
-  const knowFeedbackLabel = (
-    <Animated.View
-      style={{
-        opacity: knowFeedbackOpacity,
-        position: "absolute",
-        zIndex: 1000,
-        width: "100%",
-        alignItems: "flex-start",
-      }}
-    >
-      <FontAwesomeIcon icon={faThumbsUp} color={whiteBackground} size={40} />
-    </Animated.View>
-  );
   const dontKnowFeedbackLabel = (
     <Animated.View
       style={{
@@ -86,7 +74,7 @@ export default function Center() {
   );
   const feedbackLabel = (
     <View style={{ margin: 30 }}>
-      {knowFeedbackLabel}
+      <KnowFeedback opacity={knowFeedbackOpacity} />
       {dontKnowFeedbackLabel}
     </View>
   );

@@ -1,11 +1,6 @@
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
-import {
-  commonBlue,
-  darkBackground,
-  tongueRed,
-  whiteBackground,
-} from "../styles/AppTheme";
+import { View, StyleSheet } from "react-native";
+import { commonBlue, darkBackground, tongueRed } from "../styles/AppTheme";
 import CardFlip from "react-native-card-flip";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
