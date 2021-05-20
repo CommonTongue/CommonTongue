@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import {
   commonBlue,
   darkBackground,
@@ -14,6 +14,7 @@ export default function Card(props: {
   firstSideButton: React.ReactNode;
   secondSide: React.ReactNode;
   glow: boolean;
+  feedback?: React.ReactNode;
 }) {
   let cardRef: CardFlip | null = null;
   const flipCard = () => {
@@ -28,53 +29,100 @@ export default function Card(props: {
         }}
         duration={500}
       >
-        <View
-          style={[
-            styles.cardInner,
-            styles.firstSide,
-            props.glow ? styles.cardInnerGlow : undefined,
-            props.glow ? styles.firstSideGlow : undefined,
-          ]}
-        >
-          <View style={styles.touchableEndsContainer}>
-            <TouchableWithoutFeedback
-              style={styles.touchableEnds}
-              onPress={flipCard}
-            />
-          </View>
-          {props.firstSideButton}
-          <TouchableWithoutFeedback style={styles.touchable} onPress={flipCard}>
-            <View
-              // @ts-ignore
-              elevation={props.glow ? 8 : 0}
-            >
-              {props.firstSide}
-            </View>
-          </TouchableWithoutFeedback>
-          <View style={styles.touchableEndsContainer}>
-            <TouchableWithoutFeedback
-              style={styles.touchableEnds}
-              onPress={flipCard}
-            />
-          </View>
-        </View>
-
-        <TouchableWithoutFeedback style={styles.touchable} onPress={flipCard}>
-          <View
-            style={[
-              styles.cardInner,
-              styles.secondSide,
-              props.glow ? styles.secondSideGlow : undefined,
-              props.glow ? styles.cardInnerGlow : undefined,
-            ]}
-            // @ts-ignore
-            elevation={props.glow ? 8 : 0}
-          >
-            {props.secondSide}
-          </View>
-        </TouchableWithoutFeedback>
+        <CardFirstSide
+          glow={props.glow}
+          feedback={props.feedback}
+          firstSide={props.firstSide}
+          firstSideButton={props.firstSideButton}
+          flipCard={flipCard}
+        />
+        <CardSecondSide
+          glow={props.glow}
+          feedback={props.feedback}
+          secondSide={props.secondSide}
+          flipCard={flipCard}
+        />
       </CardFlip>
     </View>
+  );
+}
+
+function CardFirstSide(props: {
+  glow: boolean;
+  flipCard: () => void;
+  feedback: React.ReactNode;
+  firstSideButton: React.ReactNode;
+  firstSide: React.ReactNode;
+}) {
+  return (
+    <View
+      style={[
+        styles.cardInner,
+        styles.firstSide,
+        props.glow ? styles.cardInnerGlow : undefined,
+        props.glow ? styles.firstSideGlow : undefined,
+      ]}
+    >
+      <View style={styles.touchableEndsContainer}>
+        <TouchableWithoutFeedback
+          style={[styles.touchableEnds, styles.feedbackContainer]}
+          onPress={props.flipCard}
+        >
+          {props.feedback}
+        </TouchableWithoutFeedback>
+      </View>
+      <View
+        style={{
+          alignItems: "center",
+        }}
+      >
+        {props.firstSideButton}
+      </View>
+      <TouchableWithoutFeedback
+        style={styles.touchable}
+        onPress={props.flipCard}
+      >
+        <View
+          // @ts-ignore
+          elevation={props.glow ? 8 : 0}
+        >
+          {props.firstSide}
+        </View>
+      </TouchableWithoutFeedback>
+      <View style={styles.touchableEndsContainer}>
+        <TouchableWithoutFeedback
+          style={styles.touchableEnds}
+          onPress={props.flipCard}
+        />
+      </View>
+    </View>
+  );
+}
+
+function CardSecondSide(props: {
+  glow: boolean;
+  secondSide: React.ReactNode;
+  feedback: React.ReactNode;
+  flipCard: () => void;
+}) {
+  return (
+    <TouchableWithoutFeedback style={styles.touchable} onPress={props.flipCard}>
+      <View
+        style={[
+          styles.cardInner,
+          styles.secondSide,
+          props.glow ? styles.secondSideGlow : undefined,
+          props.glow ? styles.cardInnerGlow : undefined,
+        ]}
+        // @ts-ignore
+        elevation={props.glow ? 8 : 0}
+      >
+        <View style={styles.feedbackContainer}>{props.feedback}</View>
+        <View style={{ flex: 1, justifyContent: "center" }}>
+          {props.secondSide}
+        </View>
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
 const styles = StyleSheet.create({
@@ -88,8 +136,6 @@ const styles = StyleSheet.create({
     width: "100%",
     borderRadius: 10,
     display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
   },
   cardInnerGlow: {
     shadowOffset: { height: 1, width: 1 },
@@ -107,4 +153,6 @@ const styles = StyleSheet.create({
   touchable: { width: "100%" },
   touchableEnds: { width: "100%", height: "100%" },
   touchableEndsContainer: { flex: 1, width: "100%" },
+  feedbackContainer: {
+  },
 });

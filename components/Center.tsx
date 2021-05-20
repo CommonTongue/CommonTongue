@@ -1,4 +1,6 @@
 import { transform } from "@babel/core";
+import { faThumbsDown, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import React, { useState } from "react";
 import {
   Text,
@@ -43,6 +45,51 @@ export default function Center() {
       ...cardPosition.getTranslateTransform(),
     ],
   };
+
+  const dontKnowFeedbackOpacity = cardPosition.x.interpolate({
+    inputRange: [-CENTER_WIDTH / 2, 0, CENTER_WIDTH / 2],
+    outputRange: [1, 0, 0],
+    extrapolate: "clamp",
+  });
+
+  const knowFeedbackOpacity = cardPosition.x.interpolate({
+    inputRange: [-CENTER_WIDTH / 2, 0, CENTER_WIDTH / 2],
+    outputRange: [0, 0, 1],
+    extrapolate: "clamp",
+  });
+
+  const knowFeedbackLabel = (
+    <Animated.View
+      style={{
+        opacity: knowFeedbackOpacity,
+        position: "absolute",
+        zIndex: 1000,
+        width: "100%",
+        alignItems: "flex-start",
+      }}
+    >
+      <FontAwesomeIcon icon={faThumbsUp} color={whiteBackground} size={40} />
+    </Animated.View>
+  );
+  const dontKnowFeedbackLabel = (
+    <Animated.View
+      style={{
+        opacity: dontKnowFeedbackOpacity,
+        position: "absolute",
+        zIndex: 1000,
+        width: "100%",
+        alignItems: "flex-end",
+      }}
+    >
+      <FontAwesomeIcon icon={faThumbsDown} color={whiteBackground} size={40} />
+    </Animated.View>
+  );
+  const feedbackLabel = (
+    <View style={{ margin: 30 }}>
+      {knowFeedbackLabel}
+      {dontKnowFeedbackLabel}
+    </View>
+  );
   return (
     <View style={styles.container}>
       {cardContents.map((cardContent, cardIndex) => {
@@ -94,6 +141,7 @@ export default function Center() {
                   </View>
                 }
                 glow={true}
+                feedback={feedbackLabel}
               />
             </Animated.View>
           );
