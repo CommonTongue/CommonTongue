@@ -8,6 +8,7 @@ export default function Card(props: {
   firstSide: React.ReactNode;
   firstSideButton: React.ReactNode;
   secondSide: React.ReactNode;
+  glow: boolean;
 }) {
   let cardRef: CardFlip | null = null;
   const flipCard = () => {
@@ -22,7 +23,14 @@ export default function Card(props: {
         }}
         duration={500}
       >
-        <View style={[styles.cardInner, styles.firstSide]}>
+        <View
+          style={[
+            styles.cardInner,
+            styles.firstSide,
+            props.glow ? styles.cardInnerGlow : undefined,
+            props.glow ? styles.firstSideGlow : undefined,
+          ]}
+        >
           <View style={styles.touchableEndsContainer}>
             <TouchableWithoutFeedback
               style={styles.touchableEnds}
@@ -33,7 +41,7 @@ export default function Card(props: {
           <TouchableWithoutFeedback style={styles.touchable} onPress={flipCard}>
             <View
               // @ts-ignore
-              elevation={8}
+              elevation={props.glow ? 8 : 0}
             >
               {props.firstSide}
             </View>
@@ -48,9 +56,14 @@ export default function Card(props: {
 
         <TouchableWithoutFeedback style={styles.touchable} onPress={flipCard}>
           <View
-            style={[styles.cardInner, styles.secondSide]}
+            style={[
+              styles.cardInner,
+              styles.secondSide,
+              props.glow ? styles.secondSideGlow : undefined,
+              props.glow ? styles.cardInnerGlow : undefined,
+            ]}
             // @ts-ignore
-            elevation={8}
+            elevation={props.glow ? 8 : 0}
           >
             {props.secondSide}
           </View>
@@ -72,18 +85,20 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+  },
+  cardInnerGlow: {
     shadowOffset: { height: 1, width: 1 },
     shadowOpacity: 0.8,
     shadowRadius: 10,
   },
   firstSide: {
-    shadowColor: commonBlue,
     backgroundColor: commonBlue,
   },
+  firstSideGlow: { shadowColor: commonBlue },
   secondSide: {
     backgroundColor: tongueRed,
-    shadowColor: tongueRed,
   },
+  secondSideGlow: { shadowColor: tongueRed },
   touchable: { width: "100%" },
   touchableEnds: { width: "100%", height: "100%" },
   touchableEndsContainer: { flex: 1, width: "100%" },
