@@ -65,17 +65,13 @@ function CardFirstSide(props: {
     >
       <View style={styles.touchableEndsContainer}>
         <TouchableWithoutFeedback
-          style={[styles.touchableEnds, styles.feedbackContainer]}
+          style={[styles.touchableEnds]}
           onPress={props.flipCard}
         >
           {props.feedback}
         </TouchableWithoutFeedback>
       </View>
-      <View
-        style={{
-          alignItems: "center",
-        }}
-      >
+      <View style={styles.firstSideButtonContainer}>
         {props.firstSideButton}
       </View>
       <TouchableWithoutFeedback
@@ -118,9 +114,7 @@ function CardSecondSide(props: {
         elevation={props.glow ? 8 : 0}
       >
         <View style={styles.feedbackContainer}>{props.feedback}</View>
-        <View style={{ flex: 1, justifyContent: "center" }}>
-          {props.secondSide}
-        </View>
+        <View style={styles.secondSideContainer}>{props.secondSide}</View>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -146,13 +140,13 @@ const styles = StyleSheet.create({
     backgroundColor: commonBlue,
   },
   firstSideGlow: { shadowColor: darkBackground },
+  firstSideButtonContainer: { alignItems: "center" },
   secondSide: {
     backgroundColor: tongueRed,
   },
+  secondSideContainer: { flex: 1, justifyContent: "center" },
   secondSideGlow: { shadowColor: darkBackground },
   touchable: { width: "100%" },
   touchableEnds: { width: "100%", height: "100%" },
   touchableEndsContainer: { flex: 1, width: "100%" },
-  feedbackContainer: {
-  },
 });
