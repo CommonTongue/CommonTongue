@@ -80,7 +80,6 @@ export default function Explore(props: {
     extrapolate: "clamp",
   });
   useEffect(() => {
-    cardPosition.setValue({ x: 0, y: 0 });
     props.setLevel(currentCardIndex);
   }, [currentCardIndex]);
 
