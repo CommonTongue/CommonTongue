@@ -15,7 +15,7 @@ export default function SettingsPage() {
       >
         developed by Furkan Toprak
       </Text>
-      <View style={{ alignItems: "center", marginTop: 10 }}>
+      <View style={styles.copyright}>
         <FontAwesomeIcon icon={faCopyright} size={30} />
         <Text>Copyright 2021- Furkan Toprak, All rights reserved.</Text>
       </View>
@@ -24,7 +24,6 @@ export default function SettingsPage() {
 }
 
 const styles = StyleSheet.create({
-  container: {},
   title: {
     color: tongueRed,
     fontWeight: "bold",
@@ -39,4 +38,5 @@ const styles = StyleSheet.create({
     color: commonBlue,
     textDecorationLine: "underline",
   },
+  copyright: { alignItems: "center", marginTop: 10 },
 });

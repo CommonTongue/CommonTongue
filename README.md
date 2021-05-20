@@ -7,7 +7,6 @@
 - make pay function
 - make login page
 - make learn mode
-- make settings
 - make theme
 
 ## Backend TODO

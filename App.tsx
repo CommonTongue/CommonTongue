@@ -4,7 +4,8 @@ import TopPadding from "./components/TopPadding";
 import BottomPadding from "./components/BottomPadding";
 import TopBar from "./components/TopBar";
 import BottomBar from "./components/BottomBar";
-import Center from "./components/Center";
+import Explore from "./components/Explore";
+import Learn from "./components/Learn";
 import ModalContext, { ModalContentSchema } from "./contexts/ModalContext";
 import GlobalModal from "./components/GlobalModal";
 import {
@@ -13,8 +14,11 @@ import {
   defaultLearnLanguageValue,
   defaultTranslateLanguageValue,
 } from "./contexts/LanguageContext";
+import Decks from "./components/Decks";
 
 export default function App() {
+  const [activeTab, setActiveTab] = useState(0);
+  const [level, setLevel] = useState(0);
   const [modalState, setModalState] = useState({
     showModal: false,
     modalContent: undefined,
@@ -59,9 +63,11 @@ export default function App() {
           >
             <TopPadding />
             <GlobalModal />
-            <TopBar />
-            <Center />
-            <BottomBar />
+            <TopBar level={level}/>
+            {activeTab === 0 && <Explore setLevel={setLevel}/>}
+            {activeTab === 1 && <Decks />}
+            {activeTab === 2 && <Learn />}
+            <BottomBar activeTab={activeTab} setActiveTab={setActiveTab} />
             <BottomPadding />
           </TranslateContext.Provider>
         </LearnContext.Provider>

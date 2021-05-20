@@ -29,18 +29,20 @@ const tabs: TabSchema[] = [
   },
 ];
 
-export default function BottomBar() {
-  const [activeTab, setActiveTab] = useState(0);
+export default function BottomBar(props: {
+  activeTab: number;
+  setActiveTab: (newTab: number) => void;
+}) {
   return (
     <View style={styles.bottomBar}>
       {tabs.map((tab: TabSchema, tabIndex: number) => {
-        const tabColor = tabIndex === activeTab ? commonBlue : "#000";
+        const tabColor = tabIndex === props.activeTab ? commonBlue : "#000";
         return (
           <TouchableHighlight
             underlayColor={"none"}
             style={styles.actionButton}
             key={`bottom-action-${tabIndex}`}
-            onPress={() => setActiveTab(tabIndex)}
+            onPress={() => props.setActiveTab(tabIndex)}
           >
             <View
               style={{

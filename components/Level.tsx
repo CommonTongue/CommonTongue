@@ -4,11 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faGrinTongue } from "@fortawesome/free-solid-svg-icons";
 import { whiteBackground } from "../styles/AppTheme";
 
-export default function Level() {
+export default function Level(props: { level: number }) {
   return (
     <View style={styles.container}>
       <FontAwesomeIcon icon={faGrinTongue} size={40} color={whiteBackground} />
-      <Text style={styles.text}>14</Text>
+      <Text style={styles.text}>{props.level}</Text>
     </View>
   );
 }

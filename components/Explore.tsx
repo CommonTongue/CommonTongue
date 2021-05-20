@@ -1,6 +1,3 @@
-import { transform } from "@babel/core";
-import { faThumbsDown, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import React, { useEffect, useState } from "react";
 import {
   Text,
@@ -19,7 +16,9 @@ import PronounceButton from "./PronounceButton";
 
 const CENTER_WIDTH = Dimensions.get("window").width;
 
-export default function Center() {
+export default function Explore(props: {
+  setLevel: (newLevel: number) => void;
+}) {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const cardContents = [
     { vocab: "vocab 1", translation: "translation 1" },
@@ -82,6 +81,7 @@ export default function Center() {
   });
   useEffect(() => {
     cardPosition.setValue({ x: 0, y: 0 });
+    props.setLevel(currentCardIndex);
   }, [currentCardIndex]);
 
   const nextCardOpacity = cardPosition.x.interpolate({

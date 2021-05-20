@@ -6,11 +6,11 @@ import Level from "./Level";
 import SettingsButton from "./SettingsButton";
 import TranslateLanguage from "./TranslateLanguage";
 
-export default function TopBar() {
+export default function TopBar(props: { level: number }) {
   return (
     <View style={styles.container}>
       <View style={styles.topRow}>
-        <Level />
+        <Level level={props.level}/>
         <SettingsButton />
       </View>
       <View style={styles.bottomRow}>
