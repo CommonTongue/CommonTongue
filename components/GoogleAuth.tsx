@@ -4,7 +4,7 @@ import * as Google from "expo-google-app-auth";
 // @ts-ignore
 import { GOOGLE_OAUTH_CLIENT_ID } from "@env";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { commonBlue, whiteBackground } from "../styles/AppTheme";
+import { commonBlue, tongueRed, whiteBackground } from "../styles/AppTheme";
 
 async function signInWithGoogleAsync() {
   try {
@@ -15,7 +15,8 @@ async function signInWithGoogleAsync() {
     });
 
     if (result.type === "success") {
-      return result.accessToken;
+      // TODO: send to backend
+      return result.idToken;
     } else {
       return { cancelled: true };
     }
@@ -40,25 +41,48 @@ function signInWithGoogle() {
 export default function SignUp() {
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          signInWithGoogle();
-        }}
-      >
-        <Text style={styles.text}>sign up with google</Text>
-      </TouchableOpacity>
+      <SignInButton />
+      <SignUpButton />
     </View>
   );
 }
 
+function SignUpButton() {
+  return (
+    <TouchableOpacity
+      style={styles.signUpButton}
+      onPress={() => {
+        signInWithGoogle();
+      }}
+    >
+      <Text style={styles.text}>sign up with google</Text>
+    </TouchableOpacity>
+  );
+}
+function SignInButton() {
+  return (
+    <TouchableOpacity
+      style={styles.signInButton}
+      onPress={() => {
+        signInWithGoogle();
+      }}
+    >
+      <Text style={styles.text}>sign in with google</Text>
+    </TouchableOpacity>
+  );
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
-  button: {
+  signUpButton: {
+    backgroundColor: tongueRed,
+    borderRadius: 10,
+    marginTop: 20,
+  },
+  signInButton: {
     backgroundColor: commonBlue,
     borderRadius: 10,
   },
@@ -66,6 +90,6 @@ const styles = StyleSheet.create({
     color: whiteBackground,
     fontSize: 20,
     fontWeight: "bold",
-    margin: 10,
+    margin: 20,
   },
 });

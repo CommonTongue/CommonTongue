@@ -1,12 +1,12 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { whiteBackground } from "../styles/AppTheme";
-import SignUp from "./SignUp";
+import GoogleAuth from "./GoogleAuth";
 
 export default function Decks() {
   return (
     <View style={styles.container}>
-      <SignUp />
+      <GoogleAuth />
     </View>
   );
 }
