@@ -55,7 +55,7 @@ function SignUpButton() {
         signInWithGoogle();
       }}
     >
-      <Text style={styles.text}>sign up with google</Text>
+      <Text style={styles.text}>sign up with Google</Text>
     </TouchableOpacity>
   );
 }
@@ -67,7 +67,7 @@ function SignInButton() {
         signInWithGoogle();
       }}
     >
-      <Text style={styles.text}>sign in with google</Text>
+      <Text style={styles.text}>sign in with Google</Text>
     </TouchableOpacity>
   );
 }
