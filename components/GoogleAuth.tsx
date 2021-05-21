@@ -16,7 +16,12 @@ async function signInWithGoogleAsync() {
 
     if (result.type === "success") {
       // TODO: send to backend
-      return result.idToken;
+      // need access token and refresh token
+      // const backendPayload = {
+      //   accessToken: result.accessToken, // different each session
+      //   refreshToken: result.refreshToken, // Stored long-term
+      // };
+      return result.accessToken;
     } else {
       return { cancelled: true };
     }
