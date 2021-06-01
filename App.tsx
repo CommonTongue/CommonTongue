@@ -10,9 +10,8 @@ import {
   defaultLearnLanguageValue,
   defaultTranslateLanguageValue,
 } from "./contexts/LanguageContext";
-import Decks from "./components/Decks";
-import GoogleAuth from "./components/GoogleAuth";
 import SignedInView from "./components/SignedInView";
+import { SignedOutView } from "./components/SignedOutView";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState(0);
@@ -30,7 +29,7 @@ export default function App() {
     defaultTranslateLanguage
   );
 
-  const [signedIn, setSignedIn] = useState(true);
+  const [signedIn, setSignedIn] = useState(null);
 
   return (
     <View style={styles.container}>
@@ -93,11 +92,3 @@ const styles = StyleSheet.create({
   },
 });
 
-function SignedOutView() {
-  return (
-    <View style={{ flex: 1, display: "flex" }}>
-      {/** TODO: add logo */}
-      <GoogleAuth />
-    </View>
-  );
-}
