@@ -13,7 +13,7 @@ const UserContext = createContext({
   signOutUser: () => {},
 } as {
   user: UserSchema | null;
-  signInUser: () => void;
+  signInUser: (newUser: UserSchema) => void;
   signOutUser: () => void;
 });
 

@@ -12,6 +12,7 @@ import {
 } from "./contexts/LanguageContext";
 import SignedInView from "./components/SignedInView";
 import { SignedOutView } from "./components/SignedOutView";
+import UserContext, { UserSchema } from "./contexts/UserContext";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState(0);
@@ -29,54 +30,67 @@ export default function App() {
     defaultTranslateLanguage
   );
 
-  const [signedIn, setSignedIn] = useState(null);
-
+  const [signedIn, setSignedIn] = useState(null as null | UserSchema);
+  const signInUser = (newUser: UserSchema) => {
+    setSignedIn(newUser);
+  };
+  const signOutUser = () => {
+    setSignedIn(null);
+  };
   return (
     <View style={styles.container}>
-      <ModalContext.Provider
+      <UserContext.Provider
         value={{
-          showModal: modalState.showModal,
-          modalContent: modalState.modalContent,
-          toggleModal: (showModal, modalContent) => {
-            setModalState({
-              showModal,
-              modalContent,
-            });
-          },
+          user: signedIn,
+          signInUser,
+          signOutUser,
         }}
       >
-        <LearnContext.Provider
+        <ModalContext.Provider
           value={{
-            language: learnLanguage,
-            setLanguage: (newLanguage) => {
-              setLearnLanguage(newLanguage);
+            showModal: modalState.showModal,
+            modalContent: modalState.modalContent,
+            toggleModal: (showModal, modalContent) => {
+              setModalState({
+                showModal,
+                modalContent,
+              });
             },
           }}
         >
-          <TranslateContext.Provider
+          <LearnContext.Provider
             value={{
-              language: translateLanguage,
+              language: learnLanguage,
               setLanguage: (newLanguage) => {
-                setTranslateLanguage(newLanguage);
+                setLearnLanguage(newLanguage);
               },
             }}
           >
-            <TopPadding />
-            <GlobalModal />
-            {signedIn === null ? (
-              <SignedOutView />
-            ) : (
-              <SignedInView
-                activeTab={activeTab}
-                setActiveTab={setActiveTab}
-                level={level}
-                setLevel={setLevel}
-              />
-            )}
-            <BottomPadding />
-          </TranslateContext.Provider>
-        </LearnContext.Provider>
-      </ModalContext.Provider>
+            <TranslateContext.Provider
+              value={{
+                language: translateLanguage,
+                setLanguage: (newLanguage) => {
+                  setTranslateLanguage(newLanguage);
+                },
+              }}
+            >
+              <TopPadding />
+              <GlobalModal />
+              {signedIn === null ? (
+                <SignedOutView />
+              ) : (
+                <SignedInView
+                  activeTab={activeTab}
+                  setActiveTab={setActiveTab}
+                  level={level}
+                  setLevel={setLevel}
+                />
+              )}
+              <BottomPadding />
+            </TranslateContext.Provider>
+          </LearnContext.Provider>
+        </ModalContext.Provider>
+      </UserContext.Provider>
     </View>
   );
 }
@@ -91,4 +105,3 @@ const styles = StyleSheet.create({
     display: "flex",
   },
 });
-
