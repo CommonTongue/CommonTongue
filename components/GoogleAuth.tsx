@@ -22,18 +22,9 @@ async function signInWithGoogleAsync() {
 
     if (result.type === "success") {
       // TODO: send to backend
-      // need access token and refresh token
-      // const backendPayload = {
-      //   accessToken: result.accessToken, // different each session
-      //   refreshToken: result.refreshToken, // Stored long-term
-      // };
-      const idToken = result.idToken;
-      const accessToken = result.accessToken;
-      const refreshToken = result.refreshToken;
       const firstName = result.user.givenName;
       const lastName = result.user.familyName;
       const photoUrl = result.user.photoUrl;
-      const id = result.user.id;
       const email = result.user.email;
       const user: UserSchema = {
         firstName: firstName || "",
@@ -43,14 +34,6 @@ async function signInWithGoogleAsync() {
       };
 
       await storeDataToLocalAsync("user", JSON.stringify(user));
-      // locally store these. every time user launches app,
-      // we attempt to sign in with locally stored auth values.
-      // ----- How we sign in -----
-      // we will send email + accessToken + refreshToken to
-      // the server. If accessToken is not stale, we proceed
-      // once the server OKs us.
-      // If accessToken is stale, the server will refresh
-      // TODO: check if it is secure to store accessToken, refreshToken, and email locally.
       return user;
     } else {
       // if user cancels prompt.

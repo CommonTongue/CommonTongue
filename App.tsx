@@ -37,6 +37,7 @@ export default function App() {
     defaultSignedIn as null | UserSchema
   );
 
+  // prevent infinite looping with state variable.
   if (!triedSession) {
     readDataFromLocalAsync("user").then((storedUserString) => {
       if (storedUserString) {
