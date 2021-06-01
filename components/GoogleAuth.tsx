@@ -5,6 +5,11 @@ import * as Google from "expo-google-app-auth";
 import { GOOGLE_OAUTH_CLIENT_ID } from "@env";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { commonBlue, tongueRed, whiteBackground } from "../styles/AppTheme";
+import { UserSchema } from "../contexts/UserContext";
+
+interface AuthButtonProps {
+  signInUser: (newUser: UserSchema) => void;
+}
 
 async function signInWithGoogleAsync() {
   try {
@@ -24,11 +29,17 @@ async function signInWithGoogleAsync() {
       const idToken = result.idToken;
       const accessToken = result.accessToken;
       const refreshToken = result.refreshToken;
-      const givenName = result.user.givenName;
-      const familyName = result.user.familyName;
+      const firstName = result.user.givenName;
+      const lastName = result.user.familyName;
       const photoUrl = result.user.photoUrl;
       const id = result.user.id;
       const email = result.user.email;
+      const user: UserSchema = {
+        firstName: firstName || "",
+        lastName: lastName || "",
+        email: email || "",
+        photoUrl: photoUrl || "",
+      };
       // locally store these. every time user launches app,
       // we attempt to sign in with locally stored auth values.
       // ----- How we sign in -----
@@ -37,35 +48,31 @@ async function signInWithGoogleAsync() {
       // once the server OKs us.
       // If accessToken is stale, the server will refresh
       // TODO: check if it is secure to store accessToken, refreshToken, and email locally.
-      return result.accessToken;
+      return user;
     } else {
-      return { cancelled: true };
-    }
-  } catch (e) {
-    return { error: true };
-  }
-}
-
-function signInWithGoogle() {
-  signInWithGoogleAsync().then(
-    (acceptedValue) => {
-      // accepted
-    },
-    (rejectedValue) => {
-      // rejected
       alert(
         "Sorry, we can't work with your google account at this time. Please try again or contact us at commontongueapp@gmail.com."
       );
+      return null;
     }
-  );
+  } catch (e) {
+    alert(
+      "Sorry, we can't work with your google account at this time. Please try again or contact us at commontongueapp@gmail.com."
+    );
+    return null;
+  }
 }
 
-export function SignUpButton() {
+export function SignUpButton(props: AuthButtonProps) {
   return (
     <TouchableOpacity
       style={styles.signUpButton}
       onPress={() => {
-        signInWithGoogle();
+        signInWithGoogleAsync().then((newUser: UserSchema | null) => {
+          if (newUser !== null) {
+            props.signInUser(newUser);
+          }
+        });
       }}
     >
       <Text style={styles.text}>sign up with Google</Text>
@@ -73,12 +80,16 @@ export function SignUpButton() {
   );
 }
 
-export function SignInButton() {
+export function SignInButton(props: AuthButtonProps) {
   return (
     <TouchableOpacity
       style={styles.signInButton}
       onPress={() => {
-        signInWithGoogle();
+        signInWithGoogleAsync().then((newUser: UserSchema | null) => {
+          if (newUser !== null) {
+            props.signInUser(newUser);
+          }
+        });
       }}
     >
       <Text style={styles.text}>sign in with Google</Text>

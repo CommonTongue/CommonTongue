@@ -1,19 +1,20 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
+import { UserSchema } from "../contexts/UserContext";
 import { commonBlue } from "../styles/AppTheme";
 import { SignInButton, SignUpButton } from "./GoogleAuth";
 import Logo from "./Logo";
 
-export function SignedOutView() {
+export function SignedOutView(props: {
+  signInUser: (newUser: UserSchema) => void;
+}) {
   return (
     <View style={styles.container}>
       <Logo />
-      <Text style={styles.catchPhrase}>
-        learn the most common words first
-      </Text>
+      <Text style={styles.catchPhrase}>learn the most common words first</Text>
       <View style={styles.padding} />
-      <SignInButton />
-      <SignUpButton />
+      <SignInButton signInUser={props.signInUser} />
+      <SignUpButton signInUser={props.signInUser} />
     </View>
   );
 }
