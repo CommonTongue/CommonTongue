@@ -32,8 +32,6 @@ export default function App() {
 
   const [signedIn, setSignedIn] = useState(null as null | UserSchema);
   const signInUser = (newUser: UserSchema) => {
-    alert("CHANGED USER");
-    console.log(newUser);
     setSignedIn(newUser);
   };
   const signOutUser = () => {

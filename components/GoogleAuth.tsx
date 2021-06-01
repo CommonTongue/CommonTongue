@@ -50,9 +50,7 @@ async function signInWithGoogleAsync() {
       // TODO: check if it is secure to store accessToken, refreshToken, and email locally.
       return user;
     } else {
-      alert(
-        "Sorry, we can't work with your google account at this time. Please try again or contact us at commontongueapp@gmail.com."
-      );
+      // if user cancels prompt.
       return null;
     }
   } catch (e) {

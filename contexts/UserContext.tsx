@@ -5,6 +5,8 @@ export interface UserSchema {
   photoUrl: string;
   firstName: string;
   lastName: string;
+  level?: number;
+  decks?: string[];
 }
 
 const UserContext = createContext({
