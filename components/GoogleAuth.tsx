@@ -35,7 +35,7 @@ async function signInWithGoogleAsync() {
       // we will send email + accessToken + refreshToken to
       // the server. If accessToken is not stale, we proceed
       // once the server OKs us.
-      // If accessToken is stale, the server will refresh 
+      // If accessToken is stale, the server will refresh
       // TODO: check if it is secure to store accessToken, refreshToken, and email locally.
       return result.accessToken;
     } else {
@@ -59,16 +59,8 @@ function signInWithGoogle() {
     }
   );
 }
-export default function SignUp() {
-  return (
-    <View style={styles.container}>
-      <SignInButton />
-      <SignUpButton />
-    </View>
-  );
-}
 
-function SignUpButton() {
+export function SignUpButton() {
   return (
     <TouchableOpacity
       style={styles.signUpButton}
@@ -80,7 +72,8 @@ function SignUpButton() {
     </TouchableOpacity>
   );
 }
-function SignInButton() {
+
+export function SignInButton() {
   return (
     <TouchableOpacity
       style={styles.signInButton}
@@ -92,9 +85,10 @@ function SignInButton() {
     </TouchableOpacity>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 2,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -102,10 +96,16 @@ const styles = StyleSheet.create({
     backgroundColor: tongueRed,
     borderRadius: 10,
     marginTop: 20,
+    display: "flex",
+    alignItems: "center",
+    width: "80%",
   },
   signInButton: {
     backgroundColor: commonBlue,
     borderRadius: 10,
+    display: "flex",
+    alignItems: "center",
+    width: "80%",
   },
   text: {
     color: whiteBackground,

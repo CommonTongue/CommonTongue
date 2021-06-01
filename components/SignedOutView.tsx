@@ -1,16 +1,25 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import GoogleAuth from "./GoogleAuth";
+import { SignInButton, SignUpButton } from "./GoogleAuth";
+import Logo from "./Logo";
 
 export function SignedOutView() {
   return (
     <View style={styles.container}>
-      {/** TODO: add logo */}
-      <GoogleAuth />
+      <Logo />
+      <View style={styles.padding} />
+      <SignInButton />
+      <SignUpButton />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 1 },
-  });
+  container: {
+    flex: 1,
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  padding: { height: 50 },
+});
