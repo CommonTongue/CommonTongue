@@ -6,6 +6,7 @@ import { GOOGLE_OAUTH_CLIENT_ID } from "@env";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { commonBlue, tongueRed, whiteBackground } from "../styles/AppTheme";
 import { UserSchema } from "../contexts/UserContext";
+import { storeDataToLocalAsync } from "../utils/Storage";
 
 interface AuthButtonProps {
   signInUser: (newUser: UserSchema) => void;
@@ -40,6 +41,8 @@ async function signInWithGoogleAsync() {
         email: email || "",
         photoUrl: photoUrl || "",
       };
+
+      await storeDataToLocalAsync("user", JSON.stringify(user));
       // locally store these. every time user launches app,
       // we attempt to sign in with locally stored auth values.
       // ----- How we sign in -----

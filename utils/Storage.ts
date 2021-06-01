@@ -12,10 +12,6 @@ export async function storeDataToLocalAsync(
   }
 }
 
-export function storeDataToLocal(key: string, value: string) {
-  storeDataToLocalAsync(key, value).then(() => {});
-}
-
 export async function readDataFromLocalAsync(
   key: string
 ): Promise<string | null> {
@@ -26,11 +22,4 @@ export async function readDataFromLocalAsync(
     // error reading value
     return null;
   }
-}
-
-export function readDataFromLocal(key: string): string | null {
-  readDataFromLocalAsync(key).then((value: string | null) => {
-    return value;
-  });
-  return null;
 }

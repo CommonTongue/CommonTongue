@@ -13,6 +13,7 @@ import {
 import SignedInView from "./components/SignedInView";
 import { SignedOutView } from "./components/SignedOutView";
 import UserContext, { UserSchema } from "./contexts/UserContext";
+import { readDataFromLocalAsync } from "./utils/Storage";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState(0);
@@ -30,7 +31,27 @@ export default function App() {
     defaultTranslateLanguage
   );
 
-  const [signedIn, setSignedIn] = useState(null as null | UserSchema);
+  const defaultSignedIn = null;
+  const [triedSession, setTriedSession] = useState(false);
+  const [signedIn, setSignedIn] = useState(
+    defaultSignedIn as null | UserSchema
+  );
+
+  if (!triedSession) {
+    readDataFromLocalAsync("user").then((storedUserString) => {
+      if (storedUserString) {
+        try {
+          const newUserJSON: UserSchema = JSON.parse(storedUserString);
+          setSignedIn(newUserJSON);
+        } catch {
+          // error parsing
+        }
+      } else {
+        setTriedSession(true);
+      }
+    });
+  }
+
   const signInUser = (newUser: UserSchema) => {
     setSignedIn(newUser);
   };
