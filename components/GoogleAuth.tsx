@@ -21,6 +21,22 @@ async function signInWithGoogleAsync() {
       //   accessToken: result.accessToken, // different each session
       //   refreshToken: result.refreshToken, // Stored long-term
       // };
+      const idToken = result.idToken;
+      const accessToken = result.accessToken;
+      const refreshToken = result.refreshToken;
+      const givenName = result.user.givenName;
+      const familyName = result.user.familyName;
+      const photoUrl = result.user.photoUrl;
+      const id = result.user.id;
+      const email = result.user.email;
+      // locally store these. every time user launches app,
+      // we attempt to sign in with locally stored auth values.
+      // ----- How we sign in -----
+      // we will send email + accessToken + refreshToken to
+      // the server. If accessToken is not stale, we proceed
+      // once the server OKs us.
+      // If accessToken is stale, the server will refresh 
+      // TODO: check if it is secure to store accessToken, refreshToken, and email locally.
       return result.accessToken;
     } else {
       return { cancelled: true };
