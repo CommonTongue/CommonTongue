@@ -6,7 +6,6 @@ import GoogleAuth from "./GoogleAuth";
 export default function Decks() {
   return (
     <View style={styles.container}>
-      <GoogleAuth />
     </View>
   );
 }

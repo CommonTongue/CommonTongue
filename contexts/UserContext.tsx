@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-interface UserSchema {
+export interface UserSchema {
   email: string;
   photoUrl: string;
   firstName: string;
