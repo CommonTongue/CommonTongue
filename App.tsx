@@ -2,10 +2,6 @@ import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import TopPadding from "./components/TopPadding";
 import BottomPadding from "./components/BottomPadding";
-import TopBar from "./components/TopBar";
-import BottomBar from "./components/BottomBar";
-import Explore from "./components/Explore";
-import Learn from "./components/Learn";
 import ModalContext, { ModalContentSchema } from "./contexts/ModalContext";
 import GlobalModal from "./components/GlobalModal";
 import {
@@ -16,6 +12,7 @@ import {
 } from "./contexts/LanguageContext";
 import Decks from "./components/Decks";
 import GoogleAuth from "./components/GoogleAuth";
+import SignedInView from "./components/SignedInView";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState(0);
@@ -95,28 +92,6 @@ const styles = StyleSheet.create({
     display: "flex",
   },
 });
-
-function SignedInView(props: {
-  level: number;
-  setLevel: (newLevel: number) => void;
-  activeTab: number;
-  setActiveTab: (newActiveTab: number) => void;
-}) {
-  return (
-    <View
-      style={{ flex: 1, width: "100%", height: "100%", backgroundColor: "red" }}
-    >
-      <TopBar level={props.level} />
-      {props.activeTab === 0 && <Explore setLevel={props.setLevel} />}
-      {props.activeTab === 1 && <Decks />}
-      {props.activeTab === 2 && <Learn />}
-      <BottomBar
-        activeTab={props.activeTab}
-        setActiveTab={props.setActiveTab}
-      />
-    </View>
-  );
-}
 
 function SignedOutView() {
   return (
