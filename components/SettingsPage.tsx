@@ -1,15 +1,19 @@
 import { faCopyright } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import React from "react";
+import React, { useContext } from "react";
 import { Linking, View, StyleSheet, Text } from "react-native";
+import UserContext from "../contexts/UserContext";
 import { commonBlue, tongueRed } from "../styles/AppTheme";
+import { SignOutButton } from "./GoogleAuth";
 import UserProfile from "./UserProfile";
 
 export default function SettingsPage() {
+  const signOutUser = useContext(UserContext).signOutUser;
   return (
     <View style={styles.container}>
       <Text style={styles.title}>settings</Text>
       <UserProfile />
+      <SignOutButton signOutUser={signOutUser} />
       <View>
         <Text
           style={[styles.text, styles.link]}
@@ -30,8 +34,6 @@ const styles = StyleSheet.create({
   container: {
     display: "flex",
     justifyContent: "space-between",
-    borderColor: "blue",
-    borderWidth: 3,
     height: "100%",
   },
   title: {

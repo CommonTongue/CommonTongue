@@ -13,7 +13,7 @@ import {
 import SignedInView from "./components/SignedInView";
 import { SignedOutView } from "./components/SignedOutView";
 import UserContext, { UserSchema } from "./contexts/UserContext";
-import { readDataFromLocalAsync } from "./utils/Storage";
+import { readDataFromLocalAsync, storeDataToLocalAsync } from "./utils/Storage";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState(0);
@@ -40,7 +40,7 @@ export default function App() {
   // prevent infinite looping with state variable.
   if (!triedSession) {
     readDataFromLocalAsync("user").then((storedUserString) => {
-      if (storedUserString) {
+      if (storedUserString !== null && storedUserString !== "") {
         try {
           const newUserJSON: UserSchema = JSON.parse(storedUserString);
           setSignedIn(newUserJSON);
@@ -52,12 +52,17 @@ export default function App() {
       }
     });
   }
-
+  // signs in user and stores locally
   const signInUser = (newUser: UserSchema) => {
-    setSignedIn(newUser);
+    storeDataToLocalAsync("user", JSON.stringify(newUser)).then(() => {
+      setSignedIn(newUser);
+    });
   };
+  // signs out user and clears local storage
   const signOutUser = () => {
-    setSignedIn(null);
+    storeDataToLocalAsync("user", "").then(() => {
+      setSignedIn(null);
+    });
   };
   return (
     <View style={styles.container}>

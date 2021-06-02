@@ -32,8 +32,6 @@ async function signInWithGoogleAsync() {
         email: email || "",
         photoUrl: photoUrl || "",
       };
-
-      await storeDataToLocalAsync("user", JSON.stringify(user));
       return user;
     } else {
       // if user cancels prompt.
@@ -81,6 +79,19 @@ export function SignInButton(props: AuthButtonProps) {
   );
 }
 
+export function SignOutButton(props: { signOutUser: () => void }) {
+  return (
+    <TouchableOpacity
+      style={styles.signInButton}
+      onPress={() => {
+        props.signOutUser();
+      }}
+    >
+      <Text style={styles.text}>sign out</Text>
+    </TouchableOpacity>
+  );
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 2,
@@ -97,6 +108,13 @@ const styles = StyleSheet.create({
   },
   signInButton: {
     backgroundColor: commonBlue,
+    borderRadius: 10,
+    display: "flex",
+    alignItems: "center",
+    width: "80%",
+  },
+  signOutButton: {
+    backgroundColor: tongueRed,
     borderRadius: 10,
     display: "flex",
     alignItems: "center",
