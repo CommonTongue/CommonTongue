@@ -14,6 +14,8 @@ import SignedInView from "./components/SignedInView";
 import { SignedOutView } from "./components/SignedOutView";
 import UserContext, { UserSchema } from "./contexts/UserContext";
 import { readDataFromLocalAsync, storeDataToLocalAsync } from "./utils/Storage";
+// @ts-ignore
+import { BACKEND_URL } from "@env";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState(0);
@@ -54,14 +56,24 @@ export default function App() {
   }
   // signs in user and stores locally
   const signInUser = (newUser: UserSchema) => {
-    storeDataToLocalAsync("user", JSON.stringify(newUser)).then(() => {
-      setSignedIn(newUser);
+    const newUserString = JSON.stringify(newUser);
+    storeDataToLocalAsync("user", newUserString).then(() => {
+      fetch(`${BACKEND_URL}/auth`, {
+        method: "POST",
+        body: newUserString,
+        headers: {
+          "Content-type": "application/json",
+        },
+      }).then(() => {
+        setSignedIn(newUser);
+      });
     });
   };
   // signs out user and clears local storage
   const signOutUser = () => {
     storeDataToLocalAsync("user", "").then(() => {
       setSignedIn(null);
+      setModalState({ showModal: false, modalContent: undefined });
     });
   };
   return (

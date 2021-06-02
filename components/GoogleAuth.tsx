@@ -6,7 +6,6 @@ import { GOOGLE_OAUTH_CLIENT_ID } from "@env";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { commonBlue, tongueRed, whiteBackground } from "../styles/AppTheme";
 import { UserSchema } from "../contexts/UserContext";
-import { storeDataToLocalAsync } from "../utils/Storage";
 
 interface AuthButtonProps {
   signInUser: (newUser: UserSchema) => void;
@@ -82,7 +81,7 @@ export function SignInButton(props: AuthButtonProps) {
 export function SignOutButton(props: { signOutUser: () => void }) {
   return (
     <TouchableOpacity
-      style={styles.signInButton}
+      style={styles.signOutButton}
       onPress={() => {
         props.signOutUser();
       }}
@@ -118,7 +117,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     display: "flex",
     alignItems: "center",
-    width: "80%",
+    width: "100%",
   },
   text: {
     color: whiteBackground,
