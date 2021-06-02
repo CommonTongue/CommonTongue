@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     flex: 1,
   },
-  contentHolder: { width: "80%", marginTop: 30 },
+  contentHolder: { flex: 1, overflow: "scroll", width: "80%", marginTop: 30 },
   closeButton: {
     height: "10%",
     width: "80%",

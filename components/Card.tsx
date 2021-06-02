@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, StyleSheet } from "react-native";
 import { commonBlue, darkBackground, tongueRed } from "../styles/AppTheme";
 import CardFlip from "react-native-card-flip";
