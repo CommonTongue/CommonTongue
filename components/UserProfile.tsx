@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Image, Text, StyleSheet, Dimensions } from "react-native";
+import UserContext from "../contexts/UserContext";
 import { commonBlue, tongueRed } from "../styles/AppTheme";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 const profilePictureDiameter = SCREEN_WIDTH * 0.5;
-const imageURI =
-  "https://static.wikia.nocookie.net/scoobydoo/images/5/53/Scooby-Doo.png/revision/latest?cb=20201229020509";
-const firstName = "Furkan";
-const lastName = "Toprak";
-const email = "scooby@doo.com";
+
 export default function UserProfile() {
+  const useProfile = useContext(UserContext);
+  const user = useProfile.user;
+  const imageURI = user?.photoUrl;
+  const firstName = user?.firstName;
+  const lastName = user?.lastName;
+  const email = user?.email;
   return (
     <View style={styles.container}>
       <Image style={styles.profilePic} source={{ uri: imageURI }} />
