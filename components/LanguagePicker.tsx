@@ -10,31 +10,16 @@ import DropDownPicker, { ValueType } from "react-native-dropdown-picker";
 import { commonBlue, tongueRed, whiteBackground } from "../styles/AppTheme";
 
 const supportedLanguages = [
-  "German",
-  "Belarusian",
-  "Amharic",
-  "Czech",
-  "Portuguese",
   "Spanish",
-  "Urdu",
   "Italian",
   "Hebrew",
-  "Hindi",
   "Russian",
-  "Azerbaijani",
-  "Dutch",
-  "Korean",
-  "Bulgarian",
   "Arabic",
   "French",
-  "Indonesian",
-  "Bosnian",
-  "Bengali",
-  "Afrikaans",
-  "Greek",
-  "Turkish",
-  "Vietnamese",
   "English",
+  "Turkish",
+  "Greek",
+  "German",
 ].sort();
 
 export default function LanguagePicker(props: {

@@ -13,6 +13,8 @@ import DontKnowFeedback from "./DontKnowFeedback";
 import KnowFeedback from "./KnowFeedback";
 import OutOfVocab from "./OutOfVocab";
 import PronounceButton from "./PronounceButton";
+// @ts-ignore
+import { BACKEND_URL } from "@env";
 
 const CENTER_WIDTH = Dimensions.get("window").width;
 
@@ -80,6 +82,17 @@ export default function Explore(props: {
     extrapolate: "clamp",
   });
   useEffect(() => {
+    // fetch(`${BACKEND_URL}/levelup`, {
+    //   method: "POST",
+    //   body: {
+    //     email: 
+    //   },
+    //   headers: {
+    //     "Content-type": "application/json",
+    //   },
+    // }).then(() => {
+    //   props.setLevel(currentCardIndex);
+    // });
     props.setLevel(currentCardIndex);
   }, [currentCardIndex]);
 

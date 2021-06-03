@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { UserSchema } from "../contexts/UserContext";
 import { commonBlue } from "../styles/AppTheme";
 import { SignInButton, SignUpButton } from "./GoogleAuth";

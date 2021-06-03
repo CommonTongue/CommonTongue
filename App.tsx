@@ -64,7 +64,7 @@ export default function App() {
         headers: {
           "Content-type": "application/json",
         },
-      }).then(() => {
+      }).then((authResponse: Response) => {
         setSignedIn(newUser);
       });
     });
