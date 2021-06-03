@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Text,
   View,
@@ -15,12 +15,19 @@ import OutOfVocab from "./OutOfVocab";
 import PronounceButton from "./PronounceButton";
 // @ts-ignore
 import { BACKEND_URL } from "@env";
+import UserContext from "../contexts/UserContext";
 
 const CENTER_WIDTH = Dimensions.get("window").width;
 
 export default function Explore(props: {
   setLevel: (newLevel: number) => void;
 }) {
+  const useUser = useContext(UserContext);
+  const userEmail = useUser.user?.email || "";
+  const emailJson = {
+    email: userEmail,
+  };
+  const emailJsonString = JSON.stringify(emailJson);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const cardContents = [
     { vocab: "vocab 1", translation: "translation 1" },
@@ -82,17 +89,15 @@ export default function Explore(props: {
     extrapolate: "clamp",
   });
   useEffect(() => {
-    // fetch(`${BACKEND_URL}/levelup`, {
-    //   method: "POST",
-    //   body: {
-    //     email: 
-    //   },
-    //   headers: {
-    //     "Content-type": "application/json",
-    //   },
-    // }).then(() => {
-    //   props.setLevel(currentCardIndex);
-    // });
+    fetch(`${BACKEND_URL}/levelup`, {
+      method: "POST",
+      body: emailJsonString,
+      headers: {
+        "Content-type": "application/json",
+      },
+    }).then(() => {
+      props.setLevel(currentCardIndex);
+    });
     props.setLevel(currentCardIndex);
   }, [currentCardIndex]);
 
