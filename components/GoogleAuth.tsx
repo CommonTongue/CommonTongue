@@ -5,10 +5,10 @@ import * as Google from "expo-google-app-auth";
 import { GOOGLE_OAUTH_CLIENT_ID } from "@env";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { commonBlue, tongueRed, whiteBackground } from "../styles/AppTheme";
-import { UserSchema } from "../contexts/UserContext";
+import { BasicUserSchema } from "../contexts/UserContext";
 
 interface AuthButtonProps {
-  signInUser: (newUser: UserSchema) => void;
+  signInUser: (newUser: BasicUserSchema) => void;
 }
 
 async function signInWithGoogleAsync() {
@@ -25,7 +25,7 @@ async function signInWithGoogleAsync() {
       const lastName = result.user.familyName;
       const photoUrl = result.user.photoUrl;
       const email = result.user.email;
-      const user: UserSchema = {
+      const user: BasicUserSchema = {
         firstName: firstName || "",
         lastName: lastName || "",
         email: email || "",
@@ -49,7 +49,7 @@ export function SignUpButton(props: AuthButtonProps) {
     <TouchableOpacity
       style={styles.signUpButton}
       onPress={() => {
-        signInWithGoogleAsync().then((newUser: UserSchema | null) => {
+        signInWithGoogleAsync().then((newUser: BasicUserSchema | null) => {
           if (newUser !== null) {
             props.signInUser(newUser);
           }
@@ -66,7 +66,7 @@ export function SignInButton(props: AuthButtonProps) {
     <TouchableOpacity
       style={styles.signInButton}
       onPress={() => {
-        signInWithGoogleAsync().then((newUser: UserSchema | null) => {
+        signInWithGoogleAsync().then((newUser: BasicUserSchema | null) => {
           if (newUser !== null) {
             props.signInUser(newUser);
           }

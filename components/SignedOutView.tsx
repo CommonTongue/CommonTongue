@@ -1,13 +1,12 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
-import { UserSchema } from "../contexts/UserContext";
+import { BasicUserSchema } from "../contexts/UserContext";
 import { commonBlue } from "../styles/AppTheme";
 import { SignInButton, SignUpButton } from "./GoogleAuth";
 import Logo from "./Logo";
 
 export function SignedOutView(props: {
-  signInUser: (newUser: UserSchema) => void;
+  signInUser: (newUser: BasicUserSchema) => void;
 }) {
   return (
     <View style={styles.container}>

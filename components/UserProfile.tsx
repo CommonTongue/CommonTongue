@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { View, Image, Text, StyleSheet, Dimensions } from "react-native";
 import UserContext from "../contexts/UserContext";
-import { commonBlue, tongueRed } from "../styles/AppTheme";
+import { commonBlue } from "../styles/AppTheme";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 const profilePictureDiameter = SCREEN_WIDTH * 0.5;

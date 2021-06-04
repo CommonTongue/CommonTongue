@@ -12,7 +12,7 @@ import {
 } from "./contexts/LanguageContext";
 import SignedInView from "./components/SignedInView";
 import { SignedOutView } from "./components/SignedOutView";
-import UserContext, { UserSchema } from "./contexts/UserContext";
+import UserContext, { BasicUserSchema, UserSchema } from "./contexts/UserContext";
 import { readDataFromLocalAsync, storeDataToLocalAsync } from "./utils/Storage";
 // @ts-ignore
 import { BACKEND_URL } from "@env";
@@ -55,7 +55,8 @@ export default function App() {
     });
   }
   // signs in user and stores locally
-  const signInUser = (newUser: UserSchema) => {
+  const signInUser = (newUserBasicInfo: BasicUserSchema) => {
+    const newUser: UserSchema = { ...newUserBasicInfo, }
     const newUserString = JSON.stringify(newUser);
     storeDataToLocalAsync("user", newUserString).then(() => {
       fetch(`${BACKEND_URL}/auth`, {
