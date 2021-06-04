@@ -12,7 +12,10 @@ import {
 } from "./contexts/LanguageContext";
 import SignedInView from "./components/SignedInView";
 import { SignedOutView } from "./components/SignedOutView";
-import UserContext, { BasicUserSchema, UserSchema } from "./contexts/UserContext";
+import UserContext, {
+  BasicUserSchema,
+  UserSchema,
+} from "./contexts/UserContext";
 import { readDataFromLocalAsync, storeDataToLocalAsync } from "./utils/Storage";
 // @ts-ignore
 import { BACKEND_URL } from "@env";
@@ -56,17 +59,27 @@ export default function App() {
   }
   // signs in user and stores locally
   const signInUser = (newUserBasicInfo: BasicUserSchema) => {
-    const newUser: UserSchema = { ...newUserBasicInfo, }
-    const newUserString = JSON.stringify(newUser);
-    storeDataToLocalAsync("user", newUserString).then(() => {
+    // const newUser: UserSchema = { ...newUserBasicInfo, }
+    const newUserBasicString = JSON.stringify(newUserBasicInfo);
+    storeDataToLocalAsync("user", newUserBasicString).then(() => {
       fetch(`${BACKEND_URL}/auth`, {
         method: "POST",
-        body: newUserString,
+        body: newUserBasicString,
         headers: {
           "Content-type": "application/json",
         },
-      }).then((authResponse: Response) => {
-        setSignedIn(newUser);
+      }).then(() => {
+        const emailPayload = JSON.stringify({ email: newUserBasicInfo.email });
+        fetch(`${BACKEND_URL}/user`, {
+          method: "GET",
+          body: emailPayload,
+          headers: {
+            "Content-type": "application/json",
+          },
+        }).then((authResponse: Response) => {
+          console.log(JSON.stringify(authResponse));
+        });
+        // setSignedIn(newUser);
       });
     });
   };
