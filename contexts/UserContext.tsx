@@ -13,7 +13,7 @@ interface AdditionalUserInfo {
   lastSeen: number;
 }
 
-export type UserSchema = AdditionalUserInfo | BasicUserSchema;
+export type UserSchema = AdditionalUserInfo & BasicUserSchema;
 
 const UserContext = createContext({
   user: null,

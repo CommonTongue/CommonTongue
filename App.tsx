@@ -68,7 +68,7 @@ export default function App() {
       },
     });
     // await for payload
-    const resultPayload = await result.json();
+    const resultPayload: UserSchema = await result.json();
     const resultPayloadString = JSON.stringify(result);
     // store stringified payload
     await storeDataToLocalAsync("user", resultPayloadString);

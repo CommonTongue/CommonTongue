@@ -28,7 +28,9 @@ export default function Explore(props: {
     email: userEmail,
   };
   const emailJsonString = JSON.stringify(emailJson);
+  // TODO: fetch this from the level
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
+  // TODO: fetch this from the server
   const cardContents = [
     { vocab: "vocab 1", translation: "translation 1" },
     { vocab: "vocab 2", translation: "translation 2" },
@@ -98,7 +100,6 @@ export default function Explore(props: {
     }).then(() => {
       props.setLevel(currentCardIndex);
     });
-    props.setLevel(currentCardIndex);
   }, [currentCardIndex]);
 
   const nextCardOpacity = cardPosition.x.interpolate({
