@@ -67,19 +67,19 @@ export default function App() {
         "Content-type": "application/json",
       },
     });
-    const resultPayload = await result.json()
+    // await for payload
+    const resultPayload = await result.json();
     const resultPayloadString = JSON.stringify(result);
-    // store stringified payload 
+    // store stringified payload
     await storeDataToLocalAsync("user", resultPayloadString);
     // store user info in context
     setSignedIn(resultPayload);
   };
   // signs out user and clears local storage
-  const signOutUser = () => {
-    storeDataToLocalAsync("user", "").then(() => {
-      setSignedIn(null);
-      setModalState({ showModal: false, modalContent: undefined });
-    });
+  const signOutUser = async () => {
+    await storeDataToLocalAsync("user", "");
+    setSignedIn(null);
+    setModalState({ showModal: false, modalContent: undefined });
   };
   return (
     <View style={styles.container}>
