@@ -10,6 +10,7 @@ export interface BasicUserSchema {
 interface AdditionalUserInfo {
   level: number;
   decks: string[];
+  lastSeen: number;
 }
 
 export type UserSchema = AdditionalUserInfo | BasicUserSchema;
