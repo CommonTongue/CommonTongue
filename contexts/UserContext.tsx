@@ -8,8 +8,8 @@ export interface BasicUserSchema {
 }
 
 interface AdditionalUserInfo {
-  level?: number;
-  decks?: string[];
+  level: number;
+  decks: string[];
 }
 
 export type UserSchema = AdditionalUserInfo | BasicUserSchema;

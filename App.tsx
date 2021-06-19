@@ -58,22 +58,19 @@ export default function App() {
     });
   }
   // signs in user and stores locally
-  const signInUser = (newUserBasicInfo: BasicUserSchema) => {
+  const signInUser = async (newUserBasicInfo: BasicUserSchema) => {
     // const newUser: UserSchema = { ...newUserBasicInfo, }
     const newUserBasicString = JSON.stringify(newUserBasicInfo);
-    console.log(newUserBasicString)
-    storeDataToLocalAsync("user", newUserBasicString).then(async () => {
-      const result = await fetch(`${BACKEND_URL}/auth`, {
-        method: "POST",
-        body: newUserBasicString,
-        headers: {
-          "Content-type": "application/json",
-        },
-      });
-      const resultPayload = await result.json();
-      console.log('-----')
-      console.log(resultPayload)
+    await storeDataToLocalAsync("user", newUserBasicString);
+    const result = await fetch(`${BACKEND_URL}/auth`, {
+      method: "POST",
+      body: newUserBasicString,
+      headers: {
+        "Content-type": "application/json",
+      },
     });
+    const resultPayload = await result.json();
+    console.log(resultPayload);
   };
   // signs out user and clears local storage
   const signOutUser = () => {
